@@ -78,7 +78,7 @@ const ParkingList = () => {
                                             type={"button"}
                                             
                                             className="px-3 py-3 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
-                                            onClick={()=>navigate(`/myparking/${parking.ParkingID}`)}><ArrowUpLeftIcon className="h-6 w-6 text-white text-4xl" />Navigate</button>
+                                            onClick={() => handleNavigate(parking.ParkingID, { lat: parking.Lat, lng: parking.Lng })}><ArrowUpLeftIcon className="h-6 w-6 text-white text-4xl" />Navigate</button>
 
                                     </div>
                                 </div>

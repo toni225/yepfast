@@ -5,7 +5,7 @@ import {toast} from "react-toastify";
 
 const MapDisplay = ({data = [],page,markedLocation}) => {
     const position = {lat: 10.324444518537874, lng:123.95277453359705}
-
+  
     const [marker,setMarker] = useState({})
     const [openInfoWindow, setOpenInfoWindow] = useState(false)
     const [markerRef, useMarker] = useAdvancedMarkerRef()
@@ -14,7 +14,7 @@ const MapDisplay = ({data = [],page,markedLocation}) => {
     const [directions,setDirections] = useState({})
     const [doDirections,setDoDirections] = useState(false)
     const [origin,setOrigin] = useState('')
-
+    
     useEffect(()=>{
         if(page==="CreateParking"){
             markedLocation({lat:marker.lat,lng:marker.lng})
