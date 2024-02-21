@@ -1,7 +1,7 @@
 import * as userServices from "../services/user.service"
 
 import Layout from "./layout/Layout";
-import {useState, useEffect} from "react";
+import {useState, useEffect, createRef} from "react";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import MapDisplay from "./map/MapDisplay";
@@ -11,6 +11,9 @@ const CreateParking = () => {
 
     const localStorageUser = localStorage.getItem('user')
     const [showModal, setShowModal] = useState(false)
+    const [isLoading,setIsLoading] = useState(false)
+
+    const imageRef = createRef()
 
     const [username, setUsername] = useState("")
     const [ParkingName,setParkingName] = useState("")
@@ -30,6 +33,9 @@ const CreateParking = () => {
 
     const submitForm = async (e) => {
         e.preventDefault()
+        const formData = new FormData()
+        formData.set('image',imageRef.current.files[0])
+        setIsLoading(true)
 
         const payload = {
             ParkingName,
@@ -45,18 +51,20 @@ const CreateParking = () => {
 
         try{
             const apiResponse = await userServices.createParking(payload)
+            const apiUploadImageRes = await userServices.uploadImageParking(username,formData)
 
-            if(apiResponse.data?.status === 201){
+            if(apiResponse.data?.status === 201 && apiUploadImageRes.status === 200){
                 toast.success("Parking Created!")
-                setUsername('')
                 setParkingName('')
-                setLat(null)
-                setLng(null)
-                console.log(apiResponse)
+                setLat('')
+                setLng('')
+                navigate('/')
+                setIsLoading(false)
             }
         }catch (e){
             toast.error("Error!")
             console.log(e)
+            setIsLoading(false)
         }
     }
 
@@ -64,7 +72,6 @@ const CreateParking = () => {
         if(localStorageUser!==null){
             const lsUsername = JSON.parse(localStorageUser)
             setUsername(lsUsername.username)
-
         }
     },[])
 
@@ -80,6 +87,7 @@ const CreateParking = () => {
                             <input
                                 id="parking_name"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                value={ParkingName}
                                 onChange={e=>setParkingName(e.target.value)}
                                 placeholder="Parking Name"
                                 required
@@ -111,9 +119,21 @@ const CreateParking = () => {
                             >Open Map</button>
 
                         </div>
+                        <div className="mb-5">
+                            <label htmlFor="parking_image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parking Image</label>
+                            <input
+                                id="parking_image"
+                                type={'file'}
+                                ref={imageRef}
+                                accept={'image/png, image/jpeg'}
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required
+                            />
+                        </div>
                         <button
                             type={"submit"}
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            disabled={isLoading}
+                            className="disabled:bg-gray-500 disabled:hover:bg-gray-500 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >
                             Add Parking
                         </button>

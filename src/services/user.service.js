@@ -34,6 +34,13 @@ export const removeParking = async (id) => {
     const apiResponse = axios.delete(getRemoveParkingEndpoint)
     return apiResponse
 }
+
+export const uploadImageParking = async (username,image) => {
+    const getUploadImageParkingEndpoint = `${baseURL}/uploadImage/${username}`
+    const apiResponse = axios.post(getUploadImageParkingEndpoint,image)
+    return apiResponse
+}
+
 //=======================user APIs====================================
 export const signup = async (payload) => {
     const getSignupEndpoint = `${baseURL}/signup`
