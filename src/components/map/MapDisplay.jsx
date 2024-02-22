@@ -19,8 +19,8 @@ const MapDisplay = ({data = [],page,markedLocation}) => {
     const [doDirections,setDoDirections] = useState(false)
     const [origin,setOrigin] = useState('')
 
-    const getParkingImage = async (username) => {
-        userService.getImageParking(username)
+    const getParkingImage = async (username,parkingName) => {
+        userService.getImageParking(username,parkingName)
             .then(res=>{
                 setImage(res.data.response.data[0]?.name)
             })
@@ -71,7 +71,7 @@ const MapDisplay = ({data = [],page,markedLocation}) => {
                                         onClick={(e)=> {
                                             setOpenInfoWindow(true);
                                             setSelectedMarker(parking.ParkingID)
-                                            getParkingImage(parking.username)
+                                            getParkingImage(parking.username,parking.ParkingName)
                                         }}
                                         position={{lat:parseFloat(parking.Lat),lng:parseFloat(parking.Lng)}}>
                                     <Pin
@@ -91,7 +91,7 @@ const MapDisplay = ({data = [],page,markedLocation}) => {
                                                         setDirections('')
                                                     }}>
                                                     <div id="container" className="m-[10px] relative">
-                                                        <img className="w-[262px] h-[131px] rounded-xl border border-black" rel={"image"} src={`${CDNURL}${parking.username}/${image}`}></img>
+                                                        <img className="w-[262px] h-[131px] rounded-xl border border-black" rel={"image"} src={`${CDNURL}${parking.username}/${parking.ParkingName}/${image}`}></img>
                                                         <div className="flex flex-col justify-between items-center max-w-[250px]">
                                                             <div className="bg-white mt-[-20px] py-[5px] shadow-my-shadow px-[10px] rounded-full text-lg">{parking.ParkingName}</div>
                                                         </div>
