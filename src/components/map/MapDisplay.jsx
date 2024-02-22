@@ -2,9 +2,13 @@ import {APIProvider, AdvancedMarker, InfoWindow, Map,Pin, Marker, useAdvancedMar
 import {useEffect, useState} from "react";
 import Directions from "./Directions";
 import {toast} from "react-toastify";
+import * as userService from '../../services/user.service'
 
 const MapDisplay = ({data = [],page,markedLocation}) => {
     const position = {lat: 10.324444518537874, lng:123.95277453359705}
+
+    const CDNURL = "https://evrqsaavaohqlopnfgtq.supabase.co/storage/v1/object/public/images/"
+    const [image,setImage] = useState([])
 
     const [marker,setMarker] = useState({})
     const [openInfoWindow, setOpenInfoWindow] = useState(false)
@@ -14,6 +18,17 @@ const MapDisplay = ({data = [],page,markedLocation}) => {
     const [directions,setDirections] = useState({})
     const [doDirections,setDoDirections] = useState(false)
     const [origin,setOrigin] = useState('')
+
+    const getParkingImage = async (username,parkingName) => {
+        userService.getImageParking(username,parkingName)
+            .then(res=>{
+                setImage(res.data.response.data[0]?.name)
+            })
+    }
+
+    // useEffect(()=>{
+    //
+    // },[AdvancedMarker])
 
     useEffect(()=>{
         if(page==="CreateParking"){
@@ -53,10 +68,11 @@ const MapDisplay = ({data = [],page,markedLocation}) => {
                                 <div key={parking.ParkingID}>
                                     <AdvancedMarker 
                                         ref={markerRef}
-                                        onClick={(e)=>{
+                                        onClick={(e)=> {
                                             setOpenInfoWindow(true);
-                                            setSelectedMarker(parking.ParkingID)}
-                                        } 
+                                            setSelectedMarker(parking.ParkingID)
+                                            getParkingImage(parking.username,parking.ParkingName)
+                                        }}
                                         position={{lat:parseFloat(parking.Lat),lng:parseFloat(parking.Lng)}}>
                                     <Pin
                                         background={'#22ccff'}
@@ -75,7 +91,7 @@ const MapDisplay = ({data = [],page,markedLocation}) => {
                                                         setDirections('')
                                                     }}>
                                                     <div id="container" className="m-[10px] relative">
-                                                        <img className="w-[262px] h-[131px] rounded-xl border border-black" src="https://objetivocastillalamancha.es/sites/default/files/NOTICIAS/Objetivo%20CLM/IMAGENES/uclm_letraslogo.jpg"></img>
+                                                        <img className="w-[262px] h-[131px] rounded-xl border border-black" rel={"image"} src={`${CDNURL}${parking.username}/${parking.ParkingName}/${image}`}></img>
                                                         <div className="flex flex-col justify-between items-center max-w-[250px]">
                                                             <div className="bg-white mt-[-20px] py-[5px] shadow-my-shadow px-[10px] rounded-full text-lg">{parking.ParkingName}</div>
                                                         </div>
