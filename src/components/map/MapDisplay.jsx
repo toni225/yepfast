@@ -2,7 +2,6 @@ import {APIProvider, AdvancedMarker, InfoWindow, Map,Pin, Marker, useAdvancedMar
 import {useEffect, useState} from "react";
 import Directions from "./Directions";
 import {toast} from "react-toastify";
-import "./Map.css";
 
 const MapDisplay = ({data = [],page,markedLocation}) => {
     const position = {lat: 10.324444518537874, lng:123.95277453359705}
@@ -75,32 +74,41 @@ const MapDisplay = ({data = [],page,markedLocation}) => {
                                                         setDoDirections(false)
                                                         setDirections('')
                                                     }}>
-                                                    <div className="p-2 relative">
-                                                        <div className="relative">
-                                                            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.hautetime.com%2Fwp-content%2Fuploads%2F2015%2F08%2FPlace_Vendome_Paris_20_April_2011.jpg&f=1&nofb=1&ipt=18bea3a33b7591e2d27ec2e34c6089aaea807b81e074279344c21f863ab16741&ipo=images" className="max-h-52 rounded-md"></img>
-                                                            <div className="absolute px-3 py-1 bottom-[-18px] left-2 text-[#fffffe] text-3xl bg-slate-800 rounded-full">
-                                                            {parking.ParkingName}
+                                                    <div id="container" className="m-[10px] relative">
+                                                        <img className="w-[262px] h-[131px] rounded-xl border border-black" src="https://objetivocastillalamancha.es/sites/default/files/NOTICIAS/Objetivo%20CLM/IMAGENES/uclm_letraslogo.jpg"></img>
+                                                        <div className="flex flex-col justify-between items-center max-w-[250px]">
+                                                            <div className="bg-white mt-[-20px] py-[5px] shadow-my-shadow px-[10px] rounded-full text-lg">{parking.ParkingName}</div>
+                                                        </div>
+                                                        <div className="grid justify-items-center mt-3">
+                                                            <div className="inline-flex items-center gap-2">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#18E318" height="16" viewBox="0 -960 960 960" width="16"><path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
+                                                                <div>Available</div>
                                                             </div>
                                                         </div>
-                                                        <div className="relative mt-5">
-                                                            <div className="grid grid-cols-2 gap-6 items-center">
-                                                                <div id="fourWheels" className=""><svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M240-200v40q0 17-11.5 28.5T200-120h-40q-17 0-28.5-11.5T120-160v-320l84-240q6-18 21.5-29t34.5-11h440q19 0 34.5 11t21.5 29l84 240v320q0 17-11.5 28.5T800-120h-40q-17 0-28.5-11.5T720-160v-40H240Zm-8-360h496l-42-120H274l-42 120Zm-32 80v200-200Zm100 160q25 0 42.5-17.5T360-380q0-25-17.5-42.5T300-440q-25 0-42.5 17.5T240-380q0 25 17.5 42.5T300-320Zm360 0q25 0 42.5-17.5T720-380q0-25-17.5-42.5T660-440q-25 0-42.5 17.5T600-380q0 25 17.5 42.5T660-320Zm-460 40h560v-200H200v200Z"/></svg></div>
-                                                                <div id="twoWheels" className=""><svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M160-200q-66 0-113-47T0-360q0-57 36.5-101t93.5-55l-28-24H0v-60h180l100 60 160-60h126l-62-80H400v-80h142l84 108 134-68v120h-92l70 92q15-6 30.5-9t31.5-3q66 0 113 47t47 113q0 66-47 113t-113 47q-66 0-113-47t-47-113q0-27 9.5-52.5T676-460l-20-24-136 204H400l-80-70q-5 63-51 106.5T160-200Zm0-80q33 0 56.5-23.5T240-360q0-33-23.5-56.5T160-440q-33 0-56.5 23.5T80-360q0 33 23.5 56.5T160-280Zm294-240-144 54 144-54h130-130Zm346 240q33 0 56.5-23.5T880-360q0-33-23.5-56.5T800-440q-33 0-56.5 23.5T720-360q0 33 23.5 56.5T800-280Zm-322-80 106-160H454l-144 54 120 106h48Z"/></svg></div>
-                                                                <div id="availableSpace" classNmae="">10 AVAILABLE SPACES</div>
+                                                        <div className="grid grid-cols-3 justify-items-stretch text-center my-3">
+                                                            <div className="flex flex-col justify-between items-center">
+                                                                <svg className="" xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 0 24 24" width="36px" fill="#FF8906"><path d="M0 0h24v24H0V0z" fill="none"/><path strokeWidth="0.3" stroke="black" d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-5h14v5z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg>
+                                                                <div>P 50/hr</div>
                                                             </div>
-                                                            
-                                                            <button
-                                                                className={"rounded-md bg-amber-600 p-3 hover:bg-amber-500"}
-                                                                onClick={()=>{
+                                                                <div className="flex flex-col justify-between items-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 20 20" height="36px" viewBox="0 0 20 20" width="36px" fill="#FF8906"><path strokeWidth="0.3" stroke="black" d="M14.5,9c-0.16,0-0.31,0.02-0.45,0.05L13,8h1.5V6.5l-2,1L11,6H9.01v1h1.58l1,1H9.5L7,9L6,8H3v1h2.5C4.12,9,3,10.12,3,11.5 C3,12.88,4.12,14,5.5,14c1.23,0,2.24-0.88,2.45-2.05L9,13h1.5l2.03-4.06l0.52,0.52C12.42,9.92,12,10.66,12,11.5 c0,1.38,1.12,2.5,2.5,2.5s2.5-1.12,2.5-2.5C17,10.12,15.88,9,14.5,9z M5.5,13C4.67,13,4,12.33,4,11.5S4.67,10,5.5,10 S7,10.67,7,11.5S6.33,13,5.5,13z M14.5,13c-0.83,0-1.5-0.67-1.5-1.5s0.67-1.5,1.5-1.5s1.5,0.67,1.5,1.5S15.33,13,14.5,13z"/></svg>
+                                                                <div>
+                                                                P 20/hr
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex flex-col justify-between items-center">
+                                                                <img className="border-[#FF8906] border-2 w-12 h-12 rounded-full shadow-my-shadow" src="https://scontent.fmnl4-3.fna.fbcdn.net/v/t39.30808-6/405277689_1546985252724979_2436030445669801256_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeEv92UyAB5lMmn4iWq4bzEQgFR9JhqaUoWAVH0mGppShS4rbAtE4eT4u2Pc1MRlps5GTY-dtgR9r17I-aTc1z-N&_nc_ohc=rhqlHF6dSvcAX8ApDQl&_nc_ht=scontent.fmnl4-3.fna&oh=00_AfCExSzJ-wMqB8Aw7pOKasd_yahgMEyjutu_cc6IB6ewzQ&oe=65DA41B1"></img>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex flex-col justify-between items-center mt-2">
+                                                            <button className="bg-[#FF8906] rounded-xl w-[100px] h-[30px] text-[9px] shadow-my-shadow" onClick={()=>{
                                                                     setDirections({
                                                                         origin,
                                                                         destination: `${parking.Lat}, ${parking.Lng}`
                                                                     })
                                                                     setDoDirections(true)
-                                                                }}
-                                                            >Directions</button>
+                                                                }}>SHOW DIRECTION</button>
                                                         </div>
-                                                    
                                                     </div>
                                                 </InfoWindow>
                                             </div>
