@@ -47,6 +47,12 @@ export const getImageParking = async (username,parkingName) => {
     return apiResponse
 }
 
+export const getMyParking = async (username) => {
+    const getMyParkingEndpoint = `${baseURL}/myparking/${username}`
+    const apiResponse = axios.get(getMyParkingEndpoint)
+    return apiResponse
+}
+
 //=======================user APIs====================================
 export const signup = async (payload) => {
     const getSignupEndpoint = `${baseURL}/signup`

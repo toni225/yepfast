@@ -2,7 +2,7 @@ import Layout from "./layout/Layout";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as userServices from "../services/user.service";
-import * as userService from "../services/user.service";
+import * as authServices from "../services/auth.service";
 
 const MyParkingPage = () => {
     // const CDNURL = "https://evrqsaavaohqlopnfgtq.supabase.co/storage/v1/object/public/images/"
@@ -11,9 +11,11 @@ const MyParkingPage = () => {
     const [parkingList,setParkingList] = useState([])
     // const [image,setImage] = useState([])
 
-    const fetchUser = async () => {
+    const fetchUser = async (username) => {
         try{
-            const {data} = await userServices.getAllParking()
+            const user = JSON.parse(localStorage.getItem('user'))
+            const {data} = await userServices.getMyParking(user.username)
+            // console.log(response)
             setParkingList(data.users)
         }catch (e) {
             console.log(e)
@@ -28,7 +30,7 @@ const MyParkingPage = () => {
     // }
 
     useEffect(()=>{
-        fetchUser()
+        fetchUser().catch(e=>console.log(e))
     },[])
 
     return (
