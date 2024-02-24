@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { APIProvider, AdvancedMarker, InfoWindow, Map, Pin, Marker, useAdvancedMarkerRef } from "@vis.gl/react-google-maps";
 import { Autocomplete } from "@react-google-maps/api";
-import { LoadScript } from "@react-google-maps/api"; // Import LoadScript from @react-google-maps/api
+import { LoadScript } from "@react-google-maps/api";
 import Directions from "./Directions";
 import { toast } from "react-toastify";
 import * as userService from '../../services/user.service';
