@@ -34,7 +34,8 @@ const CreateParking = () => {
     const submitForm = async (e) => {
         e.preventDefault()
         const formData = new FormData()
-        formData.set('image',imageRef.current.files[0])
+        formData.append('image',imageRef.current.files[0])
+        formData.append('parkingName',ParkingName)
         setIsLoading(true)
 
         const payload = {
@@ -64,7 +65,9 @@ const CreateParking = () => {
         }catch (e){
             toast.error("Error!")
             console.log(e)
-            setIsLoading(false)
+
+            userServices.removeParking(ParkingName).then(()=> setIsLoading(false))
+                .catch(e=>console.log(e))
         }
     }
 

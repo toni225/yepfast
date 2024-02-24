@@ -35,9 +35,21 @@ export const removeParking = async (id) => {
     return apiResponse
 }
 
-export const uploadImageParking = async (username,image) => {
-    const getUploadImageParkingEndpoint = `${baseURL}/uploadImage/${username}`
-    const apiResponse = axios.post(getUploadImageParkingEndpoint,image)
+export const uploadImageParking = async (username,formData) => {
+    const getUploadImageParkingEndpoint = `${baseURL}/img/${username}`
+    const apiResponse = axios.post(getUploadImageParkingEndpoint,formData)
+    return apiResponse
+}
+
+export const getImageParking = async (username,parkingName) => {
+    const getImageParkingEndpoint = `${baseURL}/img/${username}/${parkingName}`
+    const apiResponse = axios.get(getImageParkingEndpoint)
+    return apiResponse
+}
+
+export const getMyParking = async (username) => {
+    const getMyParkingEndpoint = `${baseURL}/myparking/${username}`
+    const apiResponse = axios.get(getMyParkingEndpoint)
     return apiResponse
 }
 

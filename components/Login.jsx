@@ -40,6 +40,7 @@ const Login = () => {
           if(userInfoResponse.data.data.length > 0){
             console.log(userInfoResponse.data.data[0])
             localStorage.setItem('user',JSON.stringify(userInfoResponse.data.data[0]))
+            localStorage.setItem('isParkingOwner',JSON.stringify(apiResponse.data.data.user?.user_metadata.isParkingOwner))
             toast.success("Welcome!")
             navigate('/')
           }else{

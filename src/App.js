@@ -12,6 +12,7 @@ import SignUp from "./components/SignUp";
 import {ToastContainer} from "react-toastify";
 import AccountPage from "./components/AccountPage";
 import {Protected} from "./components/protected";
+import MyParkingPage from "./components/MyParkingPage";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
             <Route path={'/'} element={<ParkingList/>}/>
             <Route path={'/account'} element={<Protected><AccountPage/></Protected>}/>
             <Route path={'/create'} element={<Protected><CreateParking/></Protected>}/>
+            <Route path={'/myparking/'} element={<Protected><MyParkingPage/></Protected>}/>
             <Route path={'/myparking/:id'} element={<Protected><MyParking/></Protected>}/>
             <Route path={'/myparking/:id/edit'} element={<Protected><EditParking/></Protected>}/>
             <Route path={'/parking'} element={<ParkingPage/>}/>
