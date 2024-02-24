@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { APIProvider, AdvancedMarker, InfoWindow, Map, Pin, Marker, useAdvancedMarkerRef } from "@vis.gl/react-google-maps";
+import { APIProvider, AdvancedMarker, InfoWindow, Map, Pin, Marker } from "@vis.gl/react-google-maps";
 import { Autocomplete } from "@react-google-maps/api";
 import { LoadScript } from "@react-google-maps/api";
 import Directions from "./Directions";
 import { toast } from "react-toastify";
 import * as userService from '../../services/user.service';
+
+const libraries = ["places"];
 
 const MapDisplay = ({ data = [], page, markedLocation }) => {
     const position = { lat: 10.324444518537874, lng: 123.95277453359705 };
@@ -16,16 +18,8 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
     const [directions, setDirections] = useState({});
     const [doDirections, setDoDirections] = useState(false);
     const [origin, setOrigin] = useState('');
-    const markerRef = useRef(null); // Change to useRef
+    const markerRef = useRef(null);
     const autocompleteRef = useRef(null);
-    const libraries = ["places"];
-
-    const getParkingImage = async (username, parkingName) => {
-        userService.getImageParking(username, parkingName)
-            .then(res => {
-                setImage(res.data.response.data[0]?.name);
-            });
-    };
 
     useEffect(() => {
         if (page === "CreateParking") {
@@ -61,6 +55,13 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
         }
     };
 
+    const getParkingImage = async (username, parkingName) => {
+        userService.getImageParking(username, parkingName)
+            .then(res => {
+                setImage(res.data.response.data[0]?.name);
+            });
+    };
+
     return (
         <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} libraries={libraries}>
             <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
@@ -81,11 +82,10 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                         {data?.map(parking => (
                             <div key={parking.ParkingID}>
                                 <AdvancedMarker
-                                    ref={markerRef} // Pass markerRef as ref
                                     onClick={(e) => {
                                         setOpenInfoWindow(true);
                                         setSelectedMarker(parking.ParkingID);
-                                        getParkingImage(parking.username, parking.ParkingName);
+                                        getParkingImage(parking.username, parking.ParkingName); // Make sure getParkingImage is defined
                                     }}
                                     position={{ lat: parseFloat(parking.Lat), lng: parseFloat(parking.Lng) }}
                                 >
@@ -116,30 +116,30 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                         )}
                         {page === "ParkingPage" && (
                             <div style={{ position: "absolute", top: 10, left: "50%", transform: "translateX(-50%)", zIndex: 1 }}>
-        <Autocomplete
-            onLoad={(autocomplete) => {
-                autocompleteRef.current = autocomplete;
-            }}
-            onPlaceChanged={handlePlaceChanged}
-        >
-            <input
-                type="text"
-                placeholder="Search for a location"
-                style={{
-                    boxSizing: `border-box`,
-                    border: `1px solid transparent`,
-                    width: `240px`,
-                    height: `32px`,
-                    padding: `0 12px`,
-                    borderRadius: `3px`,
-                    boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                    fontSize: `14px`,
-                    outline: `none`,
-                    textOverflow: `ellipses`,
-                }}
-            />
-        </Autocomplete>
-    </div>
+                                <Autocomplete
+                                    onLoad={(autocomplete) => {
+                                        autocompleteRef.current = autocomplete;
+                                    }}
+                                    onPlaceChanged={handlePlaceChanged}
+                                >
+                                    <input
+                                        type="text"
+                                        placeholder="Search for a location"
+                                        style={{
+                                            boxSizing: `border-box`,
+                                            border: `1px solid transparent`,
+                                            width: `240px`,
+                                            height: `32px`,
+                                            padding: `0 12px`,
+                                            borderRadius: `3px`,
+                                            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                                            fontSize: `14px`,
+                                            outline: `none`,
+                                            textOverflow: `ellipses`,
+                                        }}
+                                    />
+                                </Autocomplete>
+                            </div>
                         )}
                     </Map>
                 </div>
