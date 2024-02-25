@@ -20,6 +20,8 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
     const [origin, setOrigin] = useState('');
     const markerRef = useRef(null); // Use useRef instead of useAdvancedMarkerRef
     const autocompleteRef = useRef(null);
+    const [mapCenter, setMapCenter] = useState(position);
+
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -52,27 +54,34 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                     lat: place.geometry.location.lat(),
                     lng: place.geometry.location.lng()
                 });
+                setMapCenter({
+                    lat: place.geometry.location.lat(),
+                    lng: place.geometry.location.lng()
+                });
             }
         }
     };
+    
+
+    const mapRef = useRef(null);
 
     return (
         <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} libraries={libraries}>
             <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
                 <div style={{ height: "90vh", position: "relative" }}>
-                    <Map
-                        mapId={"bf51a910020fa25a"}
-                        zoom={15}
-                        center={position}
-                        onClick={(e) => {
-                            if (page === "CreateParking") {
-                                setMarker({
-                                    lat: e.detail.latLng.lat,
-                                    lng: e.detail.latLng.lng
-                                });
-                            }
-                        }}
-                    >
+                <Map
+                    mapId={"bf51a910020fa25a"}
+                    zoom={15}
+                    center={mapCenter}
+                    onClick={(e) => {
+                        if (page === "CreateParking") {
+                            setMarker({
+                                lat: e.detail.latLng.lat,
+                                lng: e.detail.latLng.lng
+                            });
+                        }
+                    }}
+                >
                         {data?.map(parking => (
                             <div key={parking.ParkingID}>
                                 <AdvancedMarker
