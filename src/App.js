@@ -30,7 +30,6 @@ function App() {
             <Route path={'/parking'} element={<ParkingPage/>}/>
             <Route path={'/login'} element={<Login/>}/>
             <Route path={'/signup'} element={<SignUp/>}/>
-
         </Routes>
       </BrowserRouter>
     </div>
