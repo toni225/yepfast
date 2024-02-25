@@ -46,37 +46,37 @@ const TopNavigation = () => {
                     </button>
                     <div className="hidden w-full md:block md:w-auto" id="navbar-default">
                         <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-[#0f0e17] md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-[#0f0e17] dark:bg-[#0f0e17] md:dark:bg-[#0f0e17] dark:border-gray-700">
-                            <li>
-                                <NavLink to={'/'}
-                                   className="block py-2 px-3 text-white bg-[#0f0e17] rounded md:bg-[#0f0e17] md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                                   aria-current="page">Home</NavLink>
-                            </li>
 
-                            <li>
-                                {isParkingOwner ?
+                            {isParkingOwner ?
+                                <li>
                                     <Link to={'/myparking'}
-                                             className="block py-2 px-3 text-gray-900 rounded hover:bg-[#0f0e17] md:hover:bg-[#0f0e17] md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-[#0f0e17] dark:hover:text-white md:dark:hover:bg-[#0f0e17]">
+                                          className="block py-2 px-3 text-[#fffffe] rounded md:border-0 md:hover:text-[#ffd803] md:p-0">
                                         MyParking
-                                    </Link> :
+                                    </Link>
+                                </li>
+                                 :
+                                <li>
                                     <NavLink to={'/'}
-                                             className="block py-2 px-3 text-gray-900 rounded hover:bg-[#0f0e17] md:hover:bg-[#0f0e17] md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-[#0f0e17] dark:hover:text-white md:dark:hover:bg-[#0f0e17]">
+                                             className="block py-2 px-3 text-[#fffffe] rounded md:border-0 md:hover:text-[#ffd803] md:p-0">
                                         Parking
                                     </NavLink>
-                                }
-                            </li>
-
-                            <li>
-                                {isLogin ?
+                                </li>
+                            }
+                            {isLogin ?
+                                <li>
                                     <NavLink
                                         to={'/account'}
-                                        className="block py-2 px-3 text-gray-900 rounded hover:bg-[#0f0e17] md:hover:bg-[#0f0e17] md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-[#0f0e17] dark:hover:text-white md:dark:hover:bg-[#0f0e17]"
-                                    >Account</NavLink> :
+                                        className="block py-2 px-3 text-[#fffffe] rounded md:border-0 md:hover:text-[#ffd803] md:p-0"
+                                    >Account</NavLink>
+                                </li>
+                                :
+                                <li>
                                     <NavLink
                                         to={'/login'}
-                                        className="block py-2 px-3 text-gray-900 rounded hover:bg-[#0f0e17] md:hover:bg-[#0f0e17] md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-[#0f0e17] dark:hover:text-white md:dark:hover:bg-[#0f0e17]"
+                                        className="block py-2 px-3 text-[#fffffe] rounded md:border-0 md:hover:text-[#ffd803] md:p-0"
                                     >Login</NavLink>
-                                }
-                            </li>
+                                </li>
+                            }
                             {/*<button className="block text-gray-900" onClick={getUserInfo}>clikc</button>*/}
                         </ul>
                     </div>

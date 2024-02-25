@@ -5,10 +5,14 @@ import { LoadScript } from "@react-google-maps/api";
 import Directions from "./Directions";
 import { toast } from "react-toastify";
 import * as userService from '../../services/user.service';
+import {useLocation, useNavigate} from "react-router-dom";
 
 const libraries = ["places"]; // Declare libraries as a constant variable
 
 const MapDisplay = ({ data = [], page, markedLocation }) => {
+    const {state} = useLocation()
+    const navigate = useNavigate()
+
     const position = { lat: 10.324444518537874, lng: 123.95277453359705 };
     const CDNURL = "https://evrqsaavaohqlopnfgtq.supabase.co/storage/v1/object/public/images/";
     const [image, setImage] = useState([]);
@@ -39,6 +43,24 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
         }
     }, []);
 
+    //Clicking navigate in ParkingList
+    useEffect(()=>{
+        if(state !== null){
+            setOpenInfoWindow(true);
+            setSelectedMarker(state.parkingId);
+            getParkingImage(state.username, state.parkingName);
+        }else{
+            setOpenInfoWindow(false);
+        }
+    },[mapCenter])
+
+    //pinning a location
+    useEffect(() => {
+        if (page === "CreateParking") {
+            markedLocation({ lat: marker.lat, lng: marker.lng });
+        }
+    }, [marker, page, markedLocation]);
+
     const getParkingImage = async (username, parkingName) => {
         userService.getImageParking(username, parkingName)
             .then(res => {
@@ -59,20 +81,20 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                     lng: place.geometry.location.lng()
                 });
             }
+            navigate('/parking',{state: null})
         }
     };
-    
 
     const mapRef = useRef(null);
 
     return (
         <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} libraries={libraries}>
-            <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+            <APIProvider>
                 <div style={{ height: "90vh", position: "relative" }}>
                 <Map
                     mapId={"bf51a910020fa25a"}
                     zoom={15}
-                    center={mapCenter}
+                    center={state === null ? mapCenter : {lat: parseFloat(state?.lat), lng: parseFloat(state?.lng)}}
                     onClick={(e) => {
                         if (page === "CreateParking") {
                             setMarker({
@@ -150,7 +172,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                         ))}
                         {doDirections && <Directions directions={directions} />}
                         {page === "CreateParking" && marker.lat && (
-                            <Marker position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }} />
+                            <AdvancedMarker position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }} />
                         )}
                         {page === "ParkingPage" && (
                             <Autocomplete

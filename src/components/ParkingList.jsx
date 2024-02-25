@@ -76,10 +76,10 @@ const ParkingList = () => {
                                         <div className="flex justify-end">
                                             <button
                                             type={"button"}
-                                            
                                             className="px-3 py-3 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
-                                            onClick={()=>navigate(`/myparking/${parking.ParkingID}`)}><ArrowUpLeftIcon className="h-6 w-6 text-white text-4xl" />Navigate</button>
-
+                                            onClick={()=>navigate('/parking',{state: {
+                                                    lat: parking.Lat, lng: parking.Lng,parkingId:parking.ParkingID,username:parking.username,parkingName:parking.ParkingName}})}
+                                            ><ArrowUpLeftIcon className="h-6 w-6 text-white text-4xl" />Navigate</button>
                                     </div>
                                 </div>
                             </li>
