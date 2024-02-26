@@ -38,24 +38,23 @@ const MyParkingPage = () => {
           <div className={'grid grid-cols-3 content-center'}>
               <div></div>
               <div className={'text-center'}>
-                  <h2>My Parkings</h2>
                   <div>
                       <ul>
                           {parkingList.map(myparking=>{
                               // getParkingImage(myparking.username,myparking.ParkingName)
                               return (
                                   <li key={myparking.ParkingID}>
-                                      <div className="max-w-sm rounded overflow-hidden shadow-lg">
+                                      <div className="max-w-sm my-3 duration-150 rounded overflow-hidden shadow-lg hover:scale-110">
                                           {/*<img className="w-full" src={`${CDNURL}${myparking.username}/${myparking.ParkingName}/${image}`} alt="Sunset in the mountains"/>*/}
-                                              <div className="px-6 py-4">
+                                              <div className="px-6 pt-6 pb-3">
                                                   <div className="font-bold text-xl mb-2">{myparking.ParkingName}</div>
                                               </div>
-                                              <div className="px-6 pt-4 pb-2">
+                                              <div className="px-6 pt-2 pb-2">
                                                 <button
-                                                    className={'rounded-md border px-9 py-2 hover:bg-amber-500'}
-                                                    onClick={()=>navigate(`/myparking/${myparking.ParkingID}/edit`)}
+                                                    className={'rounded-md px-9 py-2 font-normal border border-[#ffd803] hover:bg-[#ffd803] hover:drop-shadow-lg hover:text-[#fffffe]'}
+                                                    onClick={()=>navigate(`/myparking/${myparking.ParkingID}`)}
                                                 >
-                                                    Edit
+                                                    Open
                                                 </button>
                                               </div>
                                       </div>
@@ -69,7 +68,7 @@ const MyParkingPage = () => {
                   <button
                       type={"button"}
                       onClick={()=>navigate('/create')}
-                      className="md:ml-10 mt-5 focus:outline-none text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+                      className="md:ml-10 mt-5 duration-150 focus:outline-none text-white bg-[#ffd803] hover:drop-shadow-lg focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
                   >Add Parking</button>
               </div>
           </div>
