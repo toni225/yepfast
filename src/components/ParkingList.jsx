@@ -73,18 +73,10 @@ const ParkingList = () => {
                                             <p className="text-md overflow-hidden text-ellipsis">Block 6, Seawage, Pusok, Lapu-Lapu City, Cebu 6015, Philippines</p>
                                         </div>
                                     </div>
-<<<<<<< HEAD
-                                        <div className="flex justify-end">
-                                            <button
-                                            type={"button"}
-                                            className="px-3 py-3 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
-                                            onClick={()=>navigate('/parking',{state: {
-                                                    lat: parking.Lat, lng: parking.Lng,parkingId:parking.ParkingID,username:parking.username,parkingName:parking.ParkingName}})}
-                                            ><ArrowUpLeftIcon className="h-6 w-6 text-white text-4xl" />Navigate</button>
-=======
                                     <div className="flex ">
                                         <div className="bg-[#FF8906] hover:bg-[#ffc27c] m-2 min-w-[105px] rounded-lg text-center shadow-my-shadow flex flex-col justify-between items-center ">
-                                                <button type={"button"} className="w-[100%] hover:scale-150"><MapIcon className="h-16 w-[100%]"></MapIcon>NAVIGATE
+                                                <button type={"button"} className="w-[100%] hover:scale-150" onClick={()=>navigate('/parking',{state: {
+                                                    lat: parking.Lat, lng: parking.Lng,parkingId:parking.ParkingID,username:parking.username,parkingName:parking.ParkingName}})}><MapIcon className="h-16 w-[100%]"></MapIcon>NAVIGATE
                                                 </button>
                                         </div>
                                         <div className="m-2 w-[100%] flex bg-gray-300 bg-opacity-25 rounded-md">
@@ -97,7 +89,6 @@ const ParkingList = () => {
                                                 <div>P 20/hr</div>
                                             </div>
                                         </div>
->>>>>>> origin/Jake
                                     </div>
                                 </div> 
                             </li>
