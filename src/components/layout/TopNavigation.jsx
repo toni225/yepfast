@@ -4,6 +4,7 @@ import * as userService from "../../services/user.service"
 import {useEffect, useState} from "react";
 import {onSignOut} from "../shared/function.shared";
 import * as authService from '../../services/auth.service'
+import * as authSerivce from "../../services/auth.service";
 
 const TopNavigation = () => {
 
@@ -16,13 +17,19 @@ const TopNavigation = () => {
         //     setIsParkingOwner(response.data.data.user?.user_metadata.isParkingOwner)
         //     // console.log(response)
         // }).catch(e=>{console.log(e)})
-        if(localStorage.getItem('user') === null){
-            setIsLogin(false)
-        }
+        authSerivce.isLoggedIn()
+            .then(()=>{
+                if(localStorage.getItem('user') === null){
+                    setIsLogin(false)
+                }
 
-        if((localStorage.getItem('isParkingOwner') === 'true')){
-            setIsParkingOwner(true)
-        }
+                if((localStorage.getItem('isParkingOwner') === 'true')){
+                    setIsParkingOwner(true)
+                }
+            })
+            .catch(()=>{localStorage.clear()})
+
+
 
     },[])
 
