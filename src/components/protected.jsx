@@ -16,6 +16,7 @@ export const Protected = ({children}) => {
         case true:
             return children
         case false:
+            localStorage.clear()
             return <Navigate to={'/login'}/>
         case null:
             return <div>Loading...</div>
