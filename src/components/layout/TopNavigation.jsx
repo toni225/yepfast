@@ -45,7 +45,7 @@ const TopNavigation = () => {
                         </svg>
                     </button>
                     <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-                        <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-[#0f0e17] md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-[#0f0e17] dark:bg-[#0f0e17] md:dark:bg-[#0f0e17] dark:border-gray-700">
+                        <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
 
                             {isParkingOwner ?
                                 <li>
