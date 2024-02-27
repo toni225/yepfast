@@ -50,7 +50,7 @@ const TopNavigation = () => {
                             {isParkingOwner ?
                                 <li>
                                     <Link to={'/myparking'}
-                                          className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-[#ffd803] md:p-0">
+                                          className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-white md:p-0">
                                         MyParking
                                     </Link>
                                 </li>
@@ -66,7 +66,7 @@ const TopNavigation = () => {
                                 <li>
                                     <NavLink
                                         to={'/account'}
-                                        className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-[#ffd803] md:p-0"
+                                        className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-white md:p-0"
                                     >Account</NavLink>
                                 </li>
                                 :
