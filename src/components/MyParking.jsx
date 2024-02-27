@@ -142,14 +142,8 @@ const MyParking = () => {
                     <button
                         type={"button"}
                         onClick={()=>navigate('/create')}
-                        className="md:ml-10 mt-5 duration-150 focus:outline-none text-white bg-[#ffd803] hover:drop-shadow-lg focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+                        className="md:ml-10 mt-5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
                     >Add Parking</button>
-
-                    <button
-                        type={"button"}
-                        onClick={()=>navigate(-1)}
-                        className="md:ml-10 mt-5 duration-150 focus:outline-none text-white bg-[#ffd803] hover:drop-shadow-lg focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
-                    >Back</button>
                 </div>
             </div>
 
