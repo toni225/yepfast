@@ -94,6 +94,14 @@ const ParkingList = () => {
                                             <MapIcon className="h-16 w-[100%]" />
                                             NAVIGATE
                                         </button>
+                                    <div className="flex">
+                                        <div className="bg-VO-Tertiary m-2 min-w-[150px] rounded-lg text-center shadow-my-shadow cursor-pointer" onClick={()=>navigate('/parking',{state: {
+                                                    lat: parking.Lat, lng: parking.Lng,parkingId:parking.ParkingID,username:parking.username,parkingName:parking.ParkingName}})}>
+                                                <button type={"button"} className="my-2" ><svg className="mx-auto" width="48" height="48" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M29.0012 7.65305L29.4717 6.52913L28.3473 6.99861L8.08734 15.4586L6.94127 15.9372L8.09924 16.3862L14.9582 19.0458L14.9592 19.0462L16.3928 19.6056L16.9535 21.0599L16.9535 21.06L19.5935 27.9L20.0412 29.0599L20.5212 27.9131L29.0012 7.65305ZM14.1465 22.14L14.0668 21.9337L13.8606 21.8538L0.5 16.6775V15.3928L35.0675 0.932101L20.5873 35.5H19.303L14.1465 22.14Z" fill="#F9D94A" stroke="#F9D94A"/>
+                                                    </svg>
+                                                </button>
+                                                <div className="inline-absolute text-VO-Secondary">NAVIGATE</div>
                                         </div>
                                         <div className="m-2 w-[100%] flex bg-gray-300 bg-opacity-25 rounded-md">
                                             <div className="w-[50%] flex flex-col justify-between items-center">
