@@ -35,7 +35,6 @@ const TopNavigation = () => {
 
     return(
         <>
-<<<<<<< HEAD
             <nav className="border-gray-200 bg-VO-Secondary">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -44,16 +43,6 @@ const TopNavigation = () => {
                     </a>
                     <button data-collapse-toggle="navbar-default" type="button"
                             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-VO-Tertiary rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-VO-Tertiary hover:bg-VO-Tertiary hover:text-VO-Secondary"
-=======
-            <nav className="border-gray-200 bg-[#0f0E17] ">
-                <div className="max-w-screen-xl flex text-[#fffffe]  flex-wrap items-center justify-between mx-auto p-4">
-                    <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                        <span
-                            className="self-center text-2xl font-semibold whitespace-nowrap">PFASt</span>
-                    </a>
-                    <button data-collapse-toggle="navbar-default" type="button"
-                            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
->>>>>>> origin/main
                             aria-controls="navbar-default" aria-expanded="false">
                         <span className="sr-only">Open main menu</span>
                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -68,22 +57,14 @@ const TopNavigation = () => {
                             {isParkingOwner ?
                                 <li>
                                     <Link to={'/myparking'}
-<<<<<<< HEAD
                                           className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-[#ffd803] md:p-0">
-=======
-                                          className="block py-2 px-3 rounded md:border-0 md:hover:text-[#ffd803] md:p-0">
->>>>>>> origin/main
                                         MyParking
                                     </Link>
                                 </li>
                                  :
                                 <li>
                                     <NavLink to={'/'}
-<<<<<<< HEAD
                                              className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-white md:p-0">
-=======
-                                             className="block py-2 px-3 rounded md:border-0 md:hover:text-[#ffd803] md:p-0">
->>>>>>> origin/main
                                         Parking
                                     </NavLink>
                                 </li>
@@ -92,22 +73,14 @@ const TopNavigation = () => {
                                 <li>
                                     <NavLink
                                         to={'/account'}
-<<<<<<< HEAD
                                         className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-[#ffd803] md:p-0"
-=======
-                                        className="block py-2 px-3 rounded md:border-0 md:hover:text-[#ffd803] md:p-0"
->>>>>>> origin/main
                                     >Account</NavLink>
                                 </li>
                                 :
                                 <li>
                                     <NavLink
                                         to={'/login'}
-<<<<<<< HEAD
                                         className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-white md:p-0"
-=======
-                                        className="block py-2 px-3  rounded md:border-0 md:hover:text-[#ffd803] md:p-0"
->>>>>>> origin/main
                                     >Login</NavLink>
                                 </li>
                             }
