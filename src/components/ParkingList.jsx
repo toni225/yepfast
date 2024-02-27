@@ -73,6 +73,7 @@ const ParkingList = () => {
                                             <p className="text-md overflow-hidden text-ellipsis">Block 6, Seawage, Pusok, Lapu-Lapu City, Cebu 6015, Philippines</p>
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                     <div className="flex">
                                         <div className="bg-VO-Tertiary m-2 min-w-[150px] rounded-lg text-center shadow-my-shadow cursor-pointer" onClick={()=>navigate('/parking',{state: {
                                                     lat: parking.Lat, lng: parking.Lng,parkingId:parking.ParkingID,username:parking.username,parkingName:parking.ParkingName}})}>
@@ -81,6 +82,29 @@ const ParkingList = () => {
                                                     </svg>
                                                 </button>
                                                 <div className="inline-absolute text-VO-Secondary">NAVIGATE</div>
+=======
+                                    <div className="flex ">
+                                        <div className="bg-[#FF8906] hover:bg-[#ffc27c] m-2 min-w-[105px] rounded-lg text-center shadow-my-shadow flex flex-col justify-between items-center ">
+                                        <button 
+                                            type={"button"} 
+                                            className="w-[100%] hover:scale-150" 
+                                            onClick={() => {
+                                                navigate('/parking', {
+                                                    state: {
+                                                        lat: parking.Lat, 
+                                                        lng: parking.Lng,
+                                                        parkingId: parking.ParkingID,
+                                                        username: parking.username,
+                                                        parkingName: parking.ParkingName
+                                                    }
+                                                });
+                                                window.location.reload(); // Refresh the page
+                                            }}
+                                        >
+                                            <MapIcon className="h-16 w-[100%]" />
+                                            NAVIGATE
+                                        </button>
+>>>>>>> origin/main
                                         </div>
                                         <div className="m-2 w-[100%] flex rounded-md">
                                             <div className="w-[50%] flex flex-col justify-between items-center">
