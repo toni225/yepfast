@@ -53,7 +53,7 @@ const MyParkingPage = () => {
                                               <div className="px-6 pt-4 pb-2">
                                                 <button
                                                     className={'rounded-md border px-9 py-2 hover:bg-amber-500'}
-                                                    onClick={()=>navigate(`/myparking/${myparking.ParkingID}/edit`)}
+                                                    onClick={()=>navigate(`/myparking/${myparking.ParkingID}`)}
                                                 >
                                                     Edit
                                                 </button>
