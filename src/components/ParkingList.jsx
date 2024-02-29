@@ -80,12 +80,12 @@ const ParkingList = () => {
 
                 <hr className="m-5 border-slate-500"/>
                 <h1 className="text-black-500 text-4xl text-center font-sans font-bold mb-8">Parking Lots Near You</h1>
-
+                <ul role="list" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-4 pr-10 pl-10">
                     {getUserLocation() != false && parkingList.map((parking)=>{
                         return checkCircleInMarker({lat:parking.Lat,lng:parking.Lng},latLng,500)
                             ?
                              (
-                                 <ul role="list" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-4 pr-10 pl-10">
+                                 
                                     <li key={parking.ParkingID} className="bg-VO-Secondary border-solid border rounded-md shadow-my-shadow">
                                         <div className=" overflow-ellipsis truncate" >
                                             <div className="flex">
@@ -156,11 +156,11 @@ const ParkingList = () => {
                                             </div>
                                         </div>
                                     </li>
-                                 </ul>
+                                 
                             )
                             : ''
                     })}
-
+                </ul>
             </div>
         </Layout>
 
