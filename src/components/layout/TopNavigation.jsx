@@ -28,11 +28,12 @@ const TopNavigation = () => {
 
     return(
         <>
-            <nav className="border-gray-200 bg-VO-Secondary">
+            {/* <nav className="border-gray-200 bg-VO-Secondary"> */}
+            <nav className={`border-gray-200 ${isParkingOwner ? 'bg-PO-Secondary' : 'bg-VO-Secondary'}`}>
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                         <span
-                            className="self-center text-2xl font-semibold whitespace-nowrap text-VO-Tertiary">PFASt</span>
+                            className={`self-center text-2xl font-semibold whitespace-nowrap ${isParkingOwner ? 'text-PO-Tertiary' : 'text-VO-Tertiary'}`}>PFASt</span>
                     </a>
                     <button data-collapse-toggle="navbar-default" type="button"
                             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-VO-Tertiary rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-VO-Tertiary hover:bg-VO-Tertiary hover:text-VO-Secondary"
@@ -50,7 +51,7 @@ const TopNavigation = () => {
                             {isParkingOwner ?
                                 <li>
                                     <Link to={'/myparking'}
-                                          className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-white md:p-0">
+                                          className="block py-2 px-3 text-PO-Tertiary rounded md:border-0 md:hover:text-white md:p-0">
                                         MyParking
                                     </Link>
                                 </li>
@@ -66,14 +67,14 @@ const TopNavigation = () => {
                                 <li>
                                     <NavLink
                                         to={'/account'}
-                                        className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-white md:p-0"
+                                        className={`block py-2 px-3 ${isParkingOwner ? 'text-PO-Tertiary' : 'text-VO-Tertiary'} rounded md:border-0 md:hover:text-white md:p-0`}
                                     >Account</NavLink>
                                 </li>
                                 :
                                 <li>
                                     <NavLink
                                         to={'/login'}
-                                        className="block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-white md:p-0"
+                                        className={`block py-2 px-3 text-VO-Tertiary rounded md:border-0 md:hover:text-white md:p-0`}
                                     >Login</NavLink>
                                 </li>
                             }
