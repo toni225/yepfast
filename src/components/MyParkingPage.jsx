@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as userServices from "../services/user.service";
 import * as authServices from "../services/auth.service";
+import VehiclesSVG from "./layout/VehiclesSVG";
+import { PlusCircleIcon} from '@heroicons/react/24/solid';
 
 const MyParkingPage = () => {
     // const CDNURL = "https://evrqsaavaohqlopnfgtq.supabase.co/storage/v1/object/public/images/"
@@ -34,46 +36,40 @@ const MyParkingPage = () => {
     },[])
 
     return (
-      <Layout>
-          <div className={'grid grid-cols-3 content-center'}>
-              <div></div>
-              <div className={'text-center'}>
-                  <h2>My Parkings</h2>
-                  <div>
-                      <ul>
-                          {parkingList.map(myparking=>{
-                              // getParkingImage(myparking.username,myparking.ParkingName)
-                              return (
-                                  <li key={myparking.ParkingID}>
-                                      <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                                          {/*<img className="w-full" src={`${CDNURL}${myparking.username}/${myparking.ParkingName}/${image}`} alt="Sunset in the mountains"/>*/}
-                                              <div className="px-6 py-4">
-                                                  <div className="font-bold text-xl mb-2">{myparking.ParkingName}</div>
-                                              </div>
-                                              <div className="px-6 pt-4 pb-2">
-                                                <button
-                                                    className={'rounded-md border px-9 py-2 hover:bg-amber-500'}
-                                                    onClick={()=>navigate(`/myparking/${myparking.ParkingID}`)}
-                                                >
-                                                    Edit
-                                                </button>
-                                              </div>
-                                      </div>
-                                  </li>
-                              )
-                          })}
-                      </ul>
-                  </div>
-              </div>
-              <div className={'place-items-center'}>
-                  <button
-                      type={"button"}
-                      onClick={()=>navigate('/create')}
-                      className="md:ml-10 mt-5 focus:outline-none text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
-                  >Add Parking</button>
-              </div>
-          </div>
-      </Layout>
+        <Layout>
+            <div id="entire-container">
+                <ul className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-6 p-10">
+                    {parkingList.map(myparking=>{
+                        return (
+                            <li key={myparking.ParkingID} className="bg-PO-Secondary text-PO-Primary w-[300px] h-[400px] text-left mx-auto rounded-md relative transition-transform duration-300 transform hover:scale-110">
+                                <img className="w-[300px] h-[150px] object-cover rounded-md" src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80"/>
+                                <div className="px-3 py-2">
+                                    <div className="py-2 overflow-ellipsis truncate">{myparking.ParkingName}</div>
+                                    <div className="py-2 overflow-ellipsis truncate">{myparking.Lat}{myparking.Lng}</div>
+                                    <VehiclesSVG />
+                                </div>
+                                <div className="bg-PO-Tertiary text-PO-Secondary p-3 text-center tracking-widest rounded-b-md absolute bottom-0 w-full hover:cursor-pointer transition-transform duration-300 transform hover:scale-110">
+                                    EDIT PARKING
+                                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+            <div className="absolute w-[64px] h-[64px] right-0 bottom-0 mr-3 mb-3">
+                <div className="relative transition-transform duration-300 transform hover:scale-110 text-PO-Tertiary hover:bg-PO-Secondary hover:rounded-full hover:cursor-pointer">
+                    <PlusCircleIcon/>
+                </div>
+            </div>
+            
+        {/* <div className={'place-items-center'}>
+            <button
+                type={"button"}
+                onClick={()=>navigate('/create')}
+                className="md:ml-10 mt-5 focus:outline-none text-white bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+            >Add Parking</button>
+        </div> */}
+        </Layout>
     )
 }
 
