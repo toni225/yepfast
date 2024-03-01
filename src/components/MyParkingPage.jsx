@@ -56,8 +56,8 @@ const MyParkingPage = () => {
                     })}
                 </ul>
             </div>
-            <div className="absolute w-[64px] h-[64px] right-0 bottom-0 mr-3 mb-3">
-                <div className="relative transition-transform duration-300 transform hover:scale-110 text-PO-Tertiary hover:bg-PO-Secondary hover:rounded-full hover:cursor-pointer">
+            <div className="fixed w-[64px] h-[64px] right-0 bottom-0 mr-3 mb-3 z-9999">
+                <div className="sticky hover:bg-PO-Secondary hover:rounded-full hover:cursor-pointer transition-transform duration-300 transform hover:scale-110 text-PO-Tertiary ">
                     <PlusCircleIcon/>
                 </div>
             </div>
