@@ -97,9 +97,6 @@ const Login = () => {
             <a href="#recovery" className="inline-block font-sans text-sm antialiased leading-normal text-[#f25f4c]">Forgot Password?</a>
           </div>
 
-          <div className="flex justify-center pt-5">
-            <a href="?" className="inline-block font-sans text-sm antialiased leading-normal text-[#f25f4c]">Are you a Parking Owner?</a>
-          </div>
 
 
         </div>
