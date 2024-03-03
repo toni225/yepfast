@@ -41,12 +41,12 @@ const MyParkingPage = () => {
                 <ul className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-6 p-10">
                     {parkingList.map(myparking=>{
                         return (
-                            <li key={myparking.ParkingID} className="bg-PO-Secondary text-PO-Primary w-[300px] h-[400px] text-left mx-auto rounded-md relative transition-transform duration-300 transform hover:scale-110">
-                                <img className="w-[300px] h-[150px] object-cover rounded-md" src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80"/>
+                            <li key={myparking.ParkingID} className="bg-PO-Secondary text-PO-Primary w-[300px] h-[150px] text-left mx-auto rounded-md relative transition-transform duration-300 transform hover:scale-110">
+                                {/*<img className="w-[300px] h-[150px] object-cover rounded-md" src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80"/>*/}
                                 <div className="px-3 py-2">
-                                    <div className="py-2 overflow-ellipsis truncate">{myparking.ParkingName}</div>
-                                    <div className="py-2 overflow-ellipsis truncate">{myparking.Lat}{myparking.Lng}</div>
-                                    <VehiclesSVG />
+                                    <div className="py-2 overflow-ellipsis truncate text-2xl">{myparking.ParkingName}</div>
+                                    <div className="py-2 overflow-ellipsis truncate text-xs">{myparking.Lat}{myparking.Lng}</div>
+                                    {/*<VehiclesSVG />*/}
                                 </div>
                                 <div
                                     onClick={()=>{navigate(`/myparking/${myparking.ParkingID}`)}}
@@ -60,7 +60,7 @@ const MyParkingPage = () => {
             </div>
             <div className="fixed w-[64px] h-[64px] right-0 bottom-0 mr-3 mb-3 z-9999">
                 <div className="sticky hover:bg-PO-Secondary hover:rounded-full hover:cursor-pointer transition-transform duration-300 transform hover:scale-110 text-PO-Tertiary ">
-                    <PlusCircleIcon onClick={()=>navigate('/create')}/>
+                    <PlusCircleIcon title={'Create Parking'} onClick={()=>navigate('/create')}/>
                 </div>
             </div>
             
