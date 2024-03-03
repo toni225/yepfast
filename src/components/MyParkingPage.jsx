@@ -48,7 +48,9 @@ const MyParkingPage = () => {
                                     <div className="py-2 overflow-ellipsis truncate">{myparking.Lat}{myparking.Lng}</div>
                                     <VehiclesSVG />
                                 </div>
-                                <div className="bg-PO-Tertiary text-PO-Secondary p-3 text-center tracking-widest rounded-b-md absolute bottom-0 w-full hover:cursor-pointer transition-transform duration-300 transform hover:scale-110">
+                                <div
+                                    onClick={()=>{navigate(`/myparking/${myparking.ParkingID}`)}}
+                                    className="bg-PO-Tertiary text-PO-Secondary p-3 text-center tracking-widest rounded-b-md absolute bottom-0 w-full hover:cursor-pointer transition-transform duration-300 transform hover:scale-110">
                                     EDIT PARKING
                                 </div>
                             </li>
@@ -58,7 +60,7 @@ const MyParkingPage = () => {
             </div>
             <div className="fixed w-[64px] h-[64px] right-0 bottom-0 mr-3 mb-3 z-9999">
                 <div className="sticky hover:bg-PO-Secondary hover:rounded-full hover:cursor-pointer transition-transform duration-300 transform hover:scale-110 text-PO-Tertiary ">
-                    <PlusCircleIcon/>
+                    <PlusCircleIcon onClick={()=>navigate('/create')}/>
                 </div>
             </div>
             
