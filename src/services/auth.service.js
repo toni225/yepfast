@@ -11,6 +11,7 @@ export const isLoggedIn = async () => {
         }
         return false
     }catch (e) {
+        localStorage.clear()
         if(e.response.status === 401){
             return false
         }
