@@ -12,7 +12,7 @@ const CredentialForm = ({data}) => {
     return ( 
         <div className="flex flex-col gap-4 p-6">
             <div className="relative h-11 w-full min-w-[250px]">
-                <input className="w-full h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-yellow-500 border-t-transparent text-white outline outline-0 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-yellow-500 focus:border-2 focus:border-yellow-600 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                <input className="w-full h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-yellow-500 border-t-transparent text-black outline outline-0 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-yellow-500 focus:border-2 focus:border-yellow-600 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                        type={email}
                        required
                        onChange={e=>setEmail(e.target.value)}
@@ -21,7 +21,7 @@ const CredentialForm = ({data}) => {
             </div>
             <div className="relative h-11 w-full min-w-[200px]">
                 <input
-                    className="w-full h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-yellow-500 border-t-transparent text-white outline outline-0 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-yellow-500 focus:border-2 focus:border-yellow-600 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                    className="w-full h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-yellow-500 border-t-transparent text-black outline outline-0 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-yellow-500 focus:border-2 focus:border-yellow-600 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                     placeholder=" "
                     required
                     onChange={e=>setPassword(e.target.value)}
