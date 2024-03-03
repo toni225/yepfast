@@ -51,7 +51,7 @@ const MyParkingPage = () => {
                                 <div
                                     onClick={()=>{navigate(`/myparking/${myparking.ParkingID}`)}}
                                     className="bg-PO-Tertiary text-PO-Secondary p-3 text-center tracking-widest rounded-b-md absolute bottom-0 w-full hover:cursor-pointer transition-transform duration-300 transform hover:scale-110">
-                                    EDIT PARKING
+                                    OPEN PARKING
                                 </div>
                             </li>
                         )
