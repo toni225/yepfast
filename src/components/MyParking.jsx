@@ -80,8 +80,7 @@ const MyParking = () => {
                 <form className="text-[#FFFFFE] w-full mx-auto max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-[#0f0e17] dark:border-gray-700">
                     <div className="flex justify-between">
                         <div>
-                            <p>{ParkingID}</p>
-                            <p>{ParkingName}</p>
+                            <p className={'text-2xl font-bold'}>{ParkingName}</p>
                             <span className="flex gap-2 text-xs text-gray-500">
                               <p>{Lat}</p>
                               <p>{Lng}</p>
@@ -139,11 +138,11 @@ const MyParking = () => {
                     </div>
                 </form>
                 <div className="grid place-items-center md:place-items-start">
-                    <button
-                        type={"button"}
-                        onClick={()=>navigate('/create')}
-                        className="md:ml-10 mt-5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
-                    >Add Parking</button>
+                    {/*<button*/}
+                    {/*    type={"button"}*/}
+                    {/*    onClick={()=>navigate('/create')}*/}
+                    {/*    className="md:ml-10 mt-5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"*/}
+                    {/*>Add Parking</button>*/}
                     <button
                         type={"button"}
                         onClick={()=>navigate(-1)}
