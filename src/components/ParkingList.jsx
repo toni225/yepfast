@@ -2,9 +2,7 @@ import * as userServices from "../services/user.service"
 
 import {useEffect, useState} from "react";
 import Layout from "./layout/Layout";
-import gps from "./images/gps.png"
 import {useNavigate} from "react-router-dom";
-import { ArrowUpLeftIcon } from '@heroicons/react/24/solid'
 import { CheckCircleIcon, ExclamationCircleIcon, MapIcon } from '@heroicons/react/24/solid';
 
 
