@@ -41,8 +41,12 @@ const Login = () => {
             console.log(userInfoResponse.data.data[0])
             localStorage.setItem('user',JSON.stringify(userInfoResponse.data.data[0]))
             localStorage.setItem('isParkingOwner',JSON.stringify(apiResponse.data.data.user?.user_metadata.isParkingOwner))
-            toast.success("Welcome!")
-            navigate('/')
+            if (apiResponse.data.data.user?.user_metadata.isParkingOwner) {
+              toast.info("Logged in as Parking Owner");
+            } else {
+              toast.info("Logged in as Vehicle Owner");
+            }
+              navigate('/')
           }else{
             toast.warning("Please fill up the docs")
             navigate('/account')
