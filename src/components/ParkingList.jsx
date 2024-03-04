@@ -4,14 +4,22 @@ import {useEffect, useState} from "react";
 import Layout from "./layout/Layout";
 import {useNavigate} from "react-router-dom";
 import { CheckCircleIcon, ExclamationCircleIcon, MapIcon } from '@heroicons/react/24/solid';
-
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 const ParkingList = () => {
     const navigate = useNavigate()
     const [parkingList,setParkingList] = useState([])
-
     const [latLng, setLatLng] = useState({})
+    const [radius, setRadius] = useState(500); // Define age state variable here
+
+    const handleChange = (event) => {
+        const selectedValue = event.target.value;
+        setRadius(event.target.value);
+      };
 
     const fetchUser = async () => {
         try{
@@ -78,9 +86,31 @@ const ParkingList = () => {
 
                 <hr className="m-5 border-slate-500"/>
                 <h1 className="text-black-500 text-4xl text-center font-sans font-bold mb-8">Parking Lots Near You</h1>
+
+                    <div className="flex justify-end mr-10"> {/*Radius Menu*/}
+                    <FormControl sx={{ m: 1, minWidth: 80 }}> 
+                    <InputLabel id="demo-simple-select-autowidth-label">Radius</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-autowidth-label"
+                    id="demo-simple-select-autowidth"
+                    value={radius}
+                    onChange={handleChange}
+                    autoWidth
+                    label="Radius"
+                    >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={500}>500 meters</MenuItem>
+                    <MenuItem value={1000}>1000 meters</MenuItem>
+                    <MenuItem value={1500}>1500 meters</MenuItem>
+                    </Select>
+                </FormControl>
+                    </div>
+
                 <ul role="list" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-4 pr-10 pl-10">
                     {getUserLocation() != false && parkingList.map((parking)=>{
-                        return checkCircleInMarker({lat:parking.Lat,lng:parking.Lng},latLng,500)
+                        return checkCircleInMarker({lat:parking.Lat,lng:parking.Lng},latLng,radius)
                             ?
                              (
                                  
