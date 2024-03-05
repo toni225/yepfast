@@ -84,9 +84,9 @@ const SignUp = () => {
                     </div>
                     <div className="w-[426px] h-[620px] relative bg-slate-800 rounded-[20px] ml-4">
                         <div className="w-[150px] h-[150px] left-[138px] top-[121px] absolute" />
-                        <div className="px-[62px] py-[7px] left-[113px] top-[535px] absolute bg-amber-300 rounded-[25px] border border-amber-300 justify-center items-center inline-flex" onClick={handleSelectClick}>
-                            <div className="text-slate-800 text-2xl font-bold font-['Poppins']">Select</div>
-                        </div>
+                        <div className="px-[62px] py-[7px] left-[113px] top-[535px] absolute bg-amber-300 rounded-[25px] border border-amber-300 justify-center items-center inline-flex" onClick={() => handleSelectClick(true)}>
+                        <div className="text-slate-800 text-2xl font-bold font-['Poppins']">Select</div>
+                    </div>
                         <div className="left-[140px] top-[100px] absolute">
                         <svg width="140" height="140" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M72.4875 23.4675L31.2375 60.66C30.8481 61.0115 30.5368 61.4407 30.3236 61.92C30.1104 62.3993 30.0002 62.9179 30 63.4425V116.25C30 117.245 30.3951 118.198 31.0984 118.902C31.8016 119.605 32.7554 120 33.75 120H45V86.25C45 83.2663 46.1853 80.4048 48.295 78.295C50.4048 76.1853 53.2663 75 56.25 75H93.75C96.7337 75 99.5952 76.1853 101.705 78.295C103.815 80.4048 105 83.2663 105 86.25V120H116.25C117.245 120 118.198 119.605 118.902 118.902C119.605 118.198 120 117.245 120 116.25V63.45C120.001 62.9242 119.891 62.4041 119.678 61.9234C119.465 61.4427 119.153 61.0123 118.763 60.66L77.5125 23.46C76.8234 22.8381 75.9282 22.4939 75 22.4939C74.0718 22.4939 73.1766 22.8456 72.4875 23.4675ZM33.75 127.5C30.7663 127.5 27.9048 126.315 25.795 124.205C23.6853 122.095 22.5 119.234 22.5 116.25V63.45C22.5 60.2625 23.85 57.225 26.22 55.0875L67.47 17.895C69.5363 16.0335 72.2189 15.0033 75 15.0033C77.7811 15.0033 80.4637 16.0335 82.53 17.895L123.78 55.095C124.949 56.1478 125.884 57.434 126.524 58.8706C127.165 60.3071 127.497 61.862 127.5 63.435V116.25C127.5 119.234 126.315 122.095 124.205 124.205C122.095 126.315 119.234 127.5 116.25 127.5H33.75ZM97.5 120V105H52.5V120H97.5ZM97.5 86.25C97.5 85.2554 97.1049 84.3016 96.4017 83.5983C95.6984 82.8951 94.7446 82.5 93.75 82.5H56.25C55.2554 82.5 54.3016 82.8951 53.5984 83.5983C52.8951 84.3016 52.5 85.2554 52.5 86.25V97.5H97.5V86.25Z" fill="white"/>
@@ -106,10 +106,10 @@ const SignUp = () => {
                 </h3>
                 <p className="text-VO-Tertiary text-center font-semibold rtl:ml-5">Registration</p>
                 <CredentialForm data={getData} />
-                <div className="flex items-center justify-center pb-5">
+                {/* <div className="flex items-center justify-center pb-5">
                     <input type="checkbox" onClick={() => setIsParkingOwner(!isParkingOwner)} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" />
                     <label className="pl-2 text-VO-Tertiary">Parking Owner</label>
-                </div>
+                </div> */}
 
                 <div className="p-6 pt-1">
                     <center>
