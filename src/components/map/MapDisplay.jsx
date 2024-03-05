@@ -102,6 +102,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                 lng: e.detail.latLng.lng
                             });
                         }
+                    
                     }}
                 >
                         {data?.map(parking => (
@@ -112,8 +113,10 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                         setOpenInfoWindow(true);
                                         setSelectedMarker(parking.ParkingID);
                                         getParkingImage(parking.username, parking.ParkingName);
+                                        setDoDirections(false);     // set to false to hide directions when clicking a marker or another marker
                                     }}
                                     position={{ lat: parseFloat(parking.Lat), lng: parseFloat(parking.Lng) }}
+                                    
                                 >
                                     <Pin
                                         background={'#22ccff'}
@@ -157,6 +160,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                 </div>
                                                 <div className="flex flex-col justify-between items-center mt-2">
                                                     <button className="bg-VO-Tertiary rounded-xl w-[100px] h-[30px] text-[9px] shadow-my-shadow text-white" onClick={() => {
+                                                        setOpenInfoWindow(false);   // setOpenInfoWindow to false to hide the popup and show the direction 
                                                         setDirections({
                                                             origin,
                                                             destination: `${parking.Lat}, ${parking.Lng}`
