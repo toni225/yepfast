@@ -8,7 +8,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import ReverseGeocoding from './map/ReverseGeocoding';
+// import ReverseGeocoding from './map/ReverseGeocoding';
 
 
 const ParkingList = () => {
@@ -136,7 +136,7 @@ const ParkingList = () => {
                                                             </>
                                                         }
                                                     </p>
-                                                    <p className="text-md overflow-hidden text-ellipsis"><ReverseGeocoding lat={parking.Lat} long={parking.Lng} /> </p>
+{/*                                                     <p className="text-md overflow-hidden text-ellipsis"><ReverseGeocoding lat={parking.Lat} long={parking.Lng} /> </p> */}
                                                 </div>
                                             </div>
                                             <div className="flex">
