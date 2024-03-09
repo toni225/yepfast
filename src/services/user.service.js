@@ -101,3 +101,15 @@ export const addUser = async (payload) => {
     const apiResponse = axios.post(getAddUserEndpoint,payload)
     return apiResponse
 }
+
+export const resetPass = async (payload) => {
+    const getResetPassEndpoint = `${baseURL}/resetpassword`
+    const apiResponse = axios.post(getResetPassEndpoint,payload)
+    return apiResponse
+}
+
+export const updatePass = async (payload) => {
+    const getUpdatePassEndpoint = `${baseURL}/updatepassword`
+    const apiResponse = axios.post(getUpdatePassEndpoint,payload)
+    return apiResponse
+}
