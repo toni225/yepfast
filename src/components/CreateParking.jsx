@@ -94,6 +94,7 @@ const CreateParking = () => {
                 <br></br>
                 <div className="mx-auto max-w-lg p-6 bg-PO-Secondary border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <div className="text-amber-300 text-2xl font-normal font-['Poppins']">Add Parking</div>
+                <br></br>
                     <form className="max-w-sm mx-auto" onSubmit={submitForm}>
                         <div className="mb-5">
                             <label htmlFor="parking_name" className="text-white text-sm font-normal font-['Poppins']">Parking Name</label>
@@ -112,10 +113,13 @@ const CreateParking = () => {
                         <div className="relative">
                             <input
                                 id="parking_lat"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                // className="bg-gray-50 border borde   r-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                className="bg-slate-200 border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 value={Lat}
                                 onChange={e => setLat(e.target.value)}
                                 placeholder="Location"
+                                readOnly
+                                style={{ pointerEvents: 'none' }}
                                 required
                             />
                             <svg
@@ -138,10 +142,10 @@ const CreateParking = () => {
                     <div className="w-[380px] h-[46px] relative">
                     <div className="w-[380px] h-[46px] left-[2px] top-0 absolute bg-PO-Secondary rounded-[10px] border border-amber-300" />
                     <div
-                        className="cursor-pointer pl-[9px] pr-3 pt-1.5 pb-1 left-[9px] top-[6px] absolute bg-amber-300 rounded-[10px] border border-amber-300 justify-center items-center gap-[7px] inline-flex"
+                        className="cursor-pointer pl-[9px] pr-3 pt-1.5 pb-1 left-[9px] top-[6px] absolute hover:bg-yellow-400 bg-amber-300 rounded-[10px] border border-amber-300 justify-center items-center gap-[7px] inline-flex"
                         onClick={() => imageRef.current.click()}
                     >
-                        <div className="w-6 h-6 relative flex-col justify-start items-start flex">
+                        <div className="w-6 h-6 relative flex-col justify-start items-start flex ">
                             <svg
                                 width="24"
                                 height="24"
@@ -169,9 +173,10 @@ const CreateParking = () => {
                     </div>
                     <div className="left-[140px] top-[13px] absolute text-white text-sm font-normal font-['Poppins']">{filename}</div>
                 </div>
-                    
                         </div>
-                        <div className="mb-5">
+
+                        <div className="mb-5"> {/*Function for selecting/uploading images*/}
+
                             {/* <label htmlFor="parking_image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parking Image</label> */}
                             {/* <input
                                 id="parking_image"
@@ -190,20 +195,26 @@ const CreateParking = () => {
                                 onChange={handleFileChange}
                                 />
                         </div>
-                        <button
-                            type={"submit"}
-                            disabled={isLoading}
-                            className="disabled:bg-gray-500 disabled:hover:bg-gray-500 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-                            Add Parking
-                        </button>
+      
+                        <hr className="m-5 border-slate-500 w-500"/>
+                    
+                    <div className="flex justify-between">
                         <button
                             type={"button"}
                             onClick={()=>navigate(-1)}
-                            className="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            className="ml-4 text-PO-Secondary bg-PO-Tertiary hover:bg-yellow-400 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >
                             Cancel
                         </button>
+
+                        <button
+                            type={"submit"}
+                            disabled={isLoading}
+                            className="disabled:bg-gray-500 disabled:hover:bg-gray-500 text-PO-Secondary bg-PO-Tertiary hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-400 dark:hover:bg-yellow-300 dark:focus:ring-yellow-400"
+                        >
+                            Submit
+                        </button>
+                    </div>
                     </form>
                 </div>
 
