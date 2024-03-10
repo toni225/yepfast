@@ -113,3 +113,9 @@ export const updatePass = async (payload) => {
     const apiResponse = axios.post(getUpdatePassEndpoint,payload)
     return apiResponse
 }
+
+export const getAllReports = async () => {
+    const getAllReportsEndpoint = `${baseURL}/reports`
+    const apiResponse = axios.get(getAllReportsEndpoint)
+    return apiResponse
+}
