@@ -117,7 +117,7 @@ const MyParking = () => {
 
                         </div>
                     </div>
-                    <hr className="border-slate-500 mt-3 mb-3"/>
+                    <hr className="border-slate-500mt-3 mb-3"/>
                     <div>
                         <div className="flex gap-5 justify-between">
                             <label className="ml-5 relative inline-flex items-center cursor-pointer">
@@ -132,7 +132,6 @@ const MyParking = () => {
                                 <input type="checkbox" name="TwoWheelsStatus" onClick={e=>{setTwoWheelsStatus(e.target.checked);submitForm({[e.target.name]:e.target.checked})}} defaultChecked={TwoWheelsStatus} className="sr-only peer"/>
                                 <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-red-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
                             </label>
-
                             <p>Motorcycles</p>
                             <input name="TwoWheelsPrice" disabled={!TwoWheelsStatus ? true : false} placeholder={"Price"} className="text-[#0f0e17] rounded pl-1 md:w-32 block w-full" value={TwoWheelsPrice ? TwoWheelsPrice : ""} onChange={e=>{setTwoWheelsPrice(e.target.value);submitForm({[e.target.name]:parseInt(e.target.value,10)})}} type="number"/>
                         </div>
