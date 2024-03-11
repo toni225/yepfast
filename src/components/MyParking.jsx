@@ -135,6 +135,23 @@ const MyParking = () => {
                             <p>Motorcycles</p>
                             <input name="TwoWheelsPrice" disabled={!TwoWheelsStatus ? true : false} placeholder={"Price"} className="text-[#0f0e17] rounded pl-1 md:w-32 block w-full" value={TwoWheelsPrice ? TwoWheelsPrice : ""} onChange={e=>{setTwoWheelsPrice(e.target.value);submitForm({[e.target.name]:parseInt(e.target.value,10)})}} type="number"/>
                         </div>
+                        <div className="flex-col justify-items-center">
+                        <p className="flex justify-center">Available Spaces (Optional)</p>
+                        <div className="flex justify-center justify-items-center gap-5 mt-3">
+                            <button type="button"
+                                    onClick={e=>{setParkingSpace(ParkingSpace-1); submitForm({ParkingSpace:ParkingSpace-1})}}
+                                    disabled={ParkingSpace === 0 ? true : false}
+                                    className="text-black bg-PO-Tertiary hover:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">-
+                            </button>
+                            <span className="text-4xl">{ParkingSpace ? ParkingSpace : 0}</span>
+                            <button type="button"
+                                    name="ParkingSpace"
+                                    onClick={e=>{setParkingSpace(ParkingSpace+1); submitForm({ParkingSpace:ParkingSpace+1})}}
+                                    className="text-black bg-PO-Tertiary hover:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">+
+                            </button>
+
+                        </div>
+                    </div>
                         {/*<button type={"submit"} onClick={submitForm({FourWheelsPrice},{TwoWheelsPrice})}>Save</button>*/}
                     </div>
                 </form>
