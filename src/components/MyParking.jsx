@@ -50,10 +50,10 @@ const MyParking = () => {
             console.log(Field)
             const apiResponse = await userServices.editParking(id,Field)
             console.log(apiResponse)
-            if(apiResponse.data?.status === 200){
+            // if(apiResponse.data?.status === 200){
 
-                return toast.success("Parking Updated!")
-            }
+            //     return toast.success("Parking Updated!") //Popup everytime parking is updated
+            // }
         }catch (e) {
 
         }
@@ -74,10 +74,11 @@ const MyParking = () => {
 
     return(
         <Layout>
-            <h1 className="text-orange-500 text-center">MY PARKING</h1>
+            {/* <h1 className="text-orange-500 text-center">MY PARKING</h1> */}
+            <br></br>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <div></div>
-                <form className="text-[#FFFFFE] w-full mx-auto max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-[#0f0e17] dark:border-gray-700">
+                <form className="text-[#FFFFFE] w-full mx-auto max-w-lg p-6 bg-PO-Secondary border-gray-200 rounded-lg shadow dark:bg-[#0f0e17] dark:border-gray-700">
                     <div className="flex justify-between">
                         <div>
                             <p className={'text-2xl font-bold'}>{ParkingName}</p>
@@ -88,7 +89,7 @@ const MyParking = () => {
                         </div>
                         <NavLink to={`/myparking/${id}/edit`}>Edit</NavLink>
                     </div>
-                    <hr className="mt-3 mb-3"/>
+                    <hr className="border-slate-500 mt-3 mb-3"/>
                     <div className="flex justify-center ">
                   <span className="flex items-center">
                       Available
@@ -98,25 +99,25 @@ const MyParking = () => {
                       </label>
                   </span>
                     </div>
-                    <hr className="mt-3 mb-3"/>
+                    <hr className="border-slate-500 mt-3 mb-3"/>
                     <div className="flex-col justify-items-center">
                         <p className="flex justify-center">Available Spaces (Optional)</p>
                         <div className="flex justify-center justify-items-center gap-5 mt-3">
                             <button type="button"
                                     onClick={e=>{setParkingSpace(ParkingSpace-1); submitForm({ParkingSpace:ParkingSpace-1})}}
                                     disabled={ParkingSpace === 0 ? true : false}
-                                    className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">-
+                                    className="text-black bg-PO-Tertiary hover:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">-
                             </button>
                             <span className="text-4xl">{ParkingSpace ? ParkingSpace : 0}</span>
                             <button type="button"
                                     name="ParkingSpace"
                                     onClick={e=>{setParkingSpace(ParkingSpace+1); submitForm({ParkingSpace:ParkingSpace+1})}}
-                                    className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">+
+                                    className="text-black bg-PO-Tertiary hover:bg-yellow-400 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">+
                             </button>
 
                         </div>
                     </div>
-                    <hr className="mt-3 mb-3"/>
+                    <hr className="border-slate-500 mt-3 mb-3"/>
                     <div>
                         <div className="flex gap-5 justify-between">
                             <label className="ml-5 relative inline-flex items-center cursor-pointer">
@@ -131,6 +132,7 @@ const MyParking = () => {
                                 <input type="checkbox" name="TwoWheelsStatus" onClick={e=>{setTwoWheelsStatus(e.target.checked);submitForm({[e.target.name]:e.target.checked})}} defaultChecked={TwoWheelsStatus} className="sr-only peer"/>
                                 <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-red-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
                             </label>
+
                             <p>Motorcycles</p>
                             <input name="TwoWheelsPrice" disabled={!TwoWheelsStatus ? true : false} placeholder={"Price"} className="text-[#0f0e17] rounded pl-1 md:w-32 block w-full" value={TwoWheelsPrice ? TwoWheelsPrice : ""} onChange={e=>{setTwoWheelsPrice(e.target.value);submitForm({[e.target.name]:parseInt(e.target.value,10)})}} type="number"/>
                         </div>
