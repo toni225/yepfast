@@ -119,3 +119,9 @@ export const getAllReports = async () => {
     const apiResponse = axios.get(getAllReportsEndpoint)
     return apiResponse
 }
+
+export const banParking = async (id) => {
+    const banParkingEndpoint = `${baseURL}/reports/${id}`
+    const apiResponse = axios.delete(banParkingEndpoint)
+    return apiResponse
+}
