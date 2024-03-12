@@ -87,7 +87,7 @@ const MyParking = () => {
                                 <p>{Lng}</p>
                             </span>
                         </div>
-                        <NavLink to={`/myparking/${id}/edit`}>Edit</NavLink>
+                        <NavLink className="text-PO-Tertiary" to={`/myparking/${id}/edit`}>Edit</NavLink>
                     </div>
                     <hr className="border-slate-500 mt-3 mb-3" />
                     <div className="flex justify-center ">
@@ -112,7 +112,8 @@ const MyParking = () => {
                         </div>
                     </div>
                     
-                    <div className="flex-col justify-items-center">
+                    {FourWheelsStatus &&
+                    <div className="mt-5 flex-col justify-items-center">
                         <p className="flex justify-center">Available Spaces (Car)</p>
                         <div className="flex justify-center justify-items-center gap-5 mt-3">
                             <button type="button"
@@ -128,6 +129,8 @@ const MyParking = () => {
                             </button>
                         </div>
                     </div>
+                    }
+
                     <hr className="border-slate-500 mt-3 mb-3" />
                     <div className="flex gap-5 mt-3 justify-between">
                         <label className="ml-5 relative inline-flex items-center cursor-pointer">
@@ -137,8 +140,10 @@ const MyParking = () => {
                         <p>Motorcycle</p>
                         <input name="TwoWheelsPrice" disabled={!TwoWheelsStatus ? true : false} placeholder={"Price"} className="text-[#0f0e17] rounded pl-1 md:w-32 block w-full" value={TwoWheelsPrice ? TwoWheelsPrice : ""} onChange={e => { setTwoWheelsPrice(e.target.value); submitForm({ [e.target.name]: parseInt(e.target.value, 10) }) }} type="number" />
                     </div>
+
+                    {TwoWheelsStatus &&
                     <div className="flex-col justify-items-center">
-                        <p className="flex justify-center">Available Spaces (Motorcycle)</p>
+                        <p className="mt-5 flex justify-center">Available Spaces (Motorcycle)</p>
                         <div className="flex justify-center justify-items-center gap-5 mt-3">
                             <button type="button"
                                 onClick={e => { setParkingSpace(ParkingSpace - 1); submitForm({ ParkingSpace: ParkingSpace - 1 }) }}
@@ -153,6 +158,7 @@ const MyParking = () => {
                             </button>
                         </div>
                     </div>
+                    }
                 </form>
                 <div className="grid place-items-center md:place-items-start">
                     <button
