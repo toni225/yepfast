@@ -7,9 +7,12 @@ import userData from "./data/user.data";
 import {useEffect, useState} from "react";
 import Layout from "./layout/Layout";
 import {toast} from "react-toastify";
+import ReportComponent from "./component/Report.component";
 
 const AccountPage = () => {
     const navigate = useNavigate()
+
+    const [open,setOpen] = useState(false);
 
     const [email,setEmail] = useState('')
     const [isParkingOwner,setIsParkingOwner] = useState(null)
@@ -188,7 +191,8 @@ const AccountPage = () => {
                       {/*<span>{user.username ? user.username : ''}</span>*/}
                   </div>
                   <div className={'my-5'}>
-                      <button className={"rounded w-full px-2 text-white bg-red-700"}>Report</button>
+                      <button onClick={()=> setOpen(true)} className={"rounded w-full px-2 text-white bg-red-700"}>Report</button>
+                      <ReportComponent open={open} handleClose={()=>setOpen(false)}/>
                   </div>
                   <div>
                       <button
@@ -198,6 +202,7 @@ const AccountPage = () => {
                   </div>
               </div>
           </div>
+
       </Layout>
   )
 }
