@@ -125,3 +125,16 @@ export const banParking = async (id) => {
     const apiResponse = axios.delete(banParkingEndpoint)
     return apiResponse
 }
+
+export const addParkingHistory = async (payload) => {
+    const addParkingHistoryEndpoint = `${baseURL}/addparkinghistory`
+    const apiResponse = axios.post(addParkingHistoryEndpoint,payload)
+    return apiResponse
+}
+
+export const getParkingHistory = async (user) => {
+    const getParkingHistoryEndpoint = `${baseURL}/getparkinghistory/${user}`
+    const apiResponse = axios.get(getParkingHistoryEndpoint)
+    return apiResponse
+}
+

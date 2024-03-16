@@ -166,6 +166,12 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                             destination: `${parking.Lat}, ${parking.Lng}`
                                                         });
                                                         setDoDirections(true);
+
+                                                        //User's parking history
+                                                        userService.addParkingHistory({
+                                                            username: JSON.parse(localStorage.getItem('user')).username,
+                                                            ParkingID: parseInt(parking.ParkingID)
+                                                        }).then(res=>console.log(res)).catch(e=>console.log(e))
                                                     }}>SHOW DIRECTION</button>
                                                 </div>
                                             </div>
