@@ -15,6 +15,9 @@ module.exports = {
         'VO-Primary':  '#E7F5F5',    // 60% color - Background/Backdrops
         'VO-Secondary':  '#F9D94A',  // 30% color - Headers/Popups/etc.
         'VO-Tertiary':  '#262341',   // 10% color - Clickables/Actions
+        'Admin-Primary':  '#E7F5F5',    // 60% color - Background/Backdrops
+        'Admin-Secondary':  '#1976D2',  // 30% color - Headers/Popups/etc.
+        'Admin-Tertiary':  '#F9D94A',   // 10% color - Clickables/Actions
       }    
   },
   },
