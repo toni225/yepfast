@@ -92,13 +92,28 @@ const EditParking = () => {
     }
 
     return(
+        
         <Layout>
+            
             <div>
                 <br></br>
 
                 <div className="mx-auto max-w-lg p-6 bg-PO-Secondary border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <form className="max-w-sm mx-auto" onSubmit={submitForm}>
-                    <h1 className="text-PO-Tertiary text-2xl">Edit Parking</h1>
+                    
+                    <div className="flex justify-between">
+                        <h1 className="text-PO-Tertiary text-2xl">Edit Parking</h1>
+                        <div>
+                        <button
+                            type={"button"}
+                            onClick={()=>navigate(-1)}
+                            className="text-white bg-PO-Tertiary hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        >
+                            Back
+                        </button>
+                        </div>
+                    </div>
+                    
                     <br></br>
                         <div className="mb-5">
                             <label htmlFor="parking_name" className="block mb-2 text-white dark:text-white text-base">Parking Name</label>
@@ -159,22 +174,11 @@ const EditParking = () => {
                         </div>
                     </div>
 
-                        <button
-                            type={"submit"}
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-                            Save
-                        </button>
-                        <button
-                            type={"button"}
-                            onClick={()=>navigate(-1)}
-                            className="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-                            Back
-                        </button>
+            
                     </form>
-                    <hr className="m-5"/>
-                    <div className="flex justify-between">
+        
+                    <hr className="border-slate-500 max-w-sm mx-auto m-5"/>
+                    <div className="max-w-sm mx-auto flex justify-between">
                         <button
                             type="button"
                             onClick={parkingRemove}
@@ -184,7 +188,7 @@ const EditParking = () => {
 
                         <button
                             type={"submit"}
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            className="text-white bg-PO-Tertiary hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >
                             Save
                         </button>
