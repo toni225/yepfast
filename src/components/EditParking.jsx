@@ -87,12 +87,14 @@ const EditParking = () => {
     return(
         <Layout>
             <div>
-                <h1 className="text-orange-500 text-center">EDIT PARKING</h1>
+                <br></br>
 
-                <div className="mx-auto max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div className="mx-auto max-w-lg p-6 bg-PO-Secondary border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <form className="max-w-sm mx-auto" onSubmit={submitForm}>
+                    <h1 className="text-white text-xl">Edit Parking</h1>
+                    <br></br>
                         <div className="mb-5">
-                            <label htmlFor="parking_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parking Name</label>
+                            <label htmlFor="parking_name" className="block mb-2 text-sm font-medium text-white dark:text-white">Parking Name</label>
                             <input
                                 id="parking_name"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -103,7 +105,7 @@ const EditParking = () => {
                             />
                         </div>
                         <div className="mb-5">
-                            <label htmlFor="parking_loc" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+                            <label htmlFor="parking_loc" className="block mb-2 text-sm font-medium text-white dark:text-white">Location</label>
                             <div className="flex gap-2">
                                 <input
                                     id="parking_lat"
