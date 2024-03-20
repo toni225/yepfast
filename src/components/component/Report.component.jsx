@@ -130,9 +130,9 @@ const ReportComponent = ({open, handleClose}) => {
                         {userParkingHistory.map((history, index) => {
                             return (
                                 <tr className={'even:bg-gray-200'} key={index}>
-                                    <td>{history.ParkingID}</td>
-                                    <td>{history.ParkingDetails.ParkingName}</td>
-                                    <td>{new Date(history.created_at).toLocaleString('en-US', {
+                                    <td className={'text-center'}>{history.ParkingID}</td>
+                                    <td className={'text-center'}>{history.ParkingDetails.ParkingName}</td>
+                                    <td className={'text-center'}>{new Date(history.created_at).toLocaleString('en-US', {
                                         dateStyle: 'long',
                                         timeStyle: 'short'
                                     })}</td>
