@@ -3,6 +3,7 @@ import * as userServices from '../services/user.service'
 import {Box, Button} from "@mui/material";
 
 import {useEffect, useState} from "react";
+import AdminReportDetailsComponent from "./component/AdminReportDetails.component";
 
 const AdminPage = () => {
     const [reports, setReports] = useState([])
@@ -22,18 +23,6 @@ const AdminPage = () => {
             setReports(users)
         } catch (e) {
             console.log(e)
-        }
-    }
-    // Function to ban parking based on report ID and parking ID
-    const banParking = async (reportID, parkingID) => {
-        try {
-            if (window.confirm("Ban now?")) {
-                await userServices.banParking(reportID);
-                await userServices.removeParking(parkingID);
-                window.location.reload(); // This might not be the best way to refresh the page
-            }
-        } catch (error) {
-            console.error(error);
         }
     }
 
@@ -87,10 +76,7 @@ const AdminPage = () => {
                                     <td className={'text-center'}>{i[0].ParkingDetails.ParkingName}</td>
                                     <td className={'text-center'}>{i.length}</td>
                                     <td className={'flex gap-2 justify-center'}>
-                                        <Button variant={'outlined'}
-                                                onClick={() => console.log(`warning ${i[0].ParkingID}`)}>Warning</Button>
-                                        <Button variant={'contained'}
-                                                onClick={() => banParking(i[0].ReportID, i[0].ParkingID)}>Ban</Button>
+                                        <AdminReportDetailsComponent ParkingID={i[0].ParkingID}/>
                                     </td>
                                 </tr>
                             )
