@@ -88,7 +88,7 @@ const ReportComponent = ({open, handleClose}) => {
     const [userParkingHistory, setUserParkingHistory] = useState([]);
 
     useMemo(() => {
-        userService.getParkingHistory(JSON.parse(localStorage.getItem('user')).username)
+        userService.getParkingHistory(JSON.parse(localStorage.getItem('user'))?.username)
             .then(res => setUserParkingHistory(res.data.response.data)).catch(e => console.log(e))
     }, [])
 
