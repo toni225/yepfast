@@ -113,9 +113,17 @@ const ReportComponent = ({open, handleClose}) => {
                 // overflow: 'auto'
                 // overflowY: 'scroll'
             }}>
+                <div className='flex justify-between'>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     Parking History
                 </Typography>
+                <div className='cursor-pointer'>
+                <svg onClick={handleClose} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+                </div>
+                </div>
+
                 <div style={{height: '90%'}} className={'overflow-y-auto'}>
                     <table className={'table-auto border-separate w-full'}>
                         <thead className={'sticky top-0 bg-white z-10'}>
