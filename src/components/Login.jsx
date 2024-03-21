@@ -98,7 +98,7 @@ const Login = () => {
           </center>
           <div className="flex justify-center space-x-4">
             <a href="signup" className="underline inline-block font-sans text-sm antialiased leading-normal text-[#262341]">Sign up</a>
-            <a href="#recovery" className="underline inline-block font-sans text-sm antialiased leading-normal text-[#262341]">Forgot Password?</a>
+            <a href="recovery" className="underline inline-block font-sans text-sm antialiased leading-normal text-[#262341]">Forgot Password?</a>
           </div>
 
 
