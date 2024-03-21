@@ -5,6 +5,7 @@ import {useState, useEffect, createRef} from "react";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import MapDisplay from "./map/MapDisplay";
+import axios from "axios";
 
 const CreateParking = () => {
     const navigate = useNavigate()
@@ -41,10 +42,18 @@ const CreateParking = () => {
 
     const submitForm = async (e) => {
         e.preventDefault()
+
+        const {data: {address}} = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${Lat}&lon=${Lng}&format=json`)
+
+        if(!address) {
+            return console.log('Geocoding error.')
+        }
+
         const formData = new FormData()
         formData.append('image',imageRef.current.files[0])
         formData.append('parkingName',ParkingName)
         setIsLoading(true)
+        const ParkingAddress = `${address?.road ? `${address?.road}, ` : ''}${address?.neighbourhood ? `${address?.neighbourhood}, `: ''}${address?.hamlet ? `${address?.hamlet}, `: ''}${address?.village ? `${address?.village}, `: ''}${address?.city ? `${address?.city} City`: ''}`
 
         const payload = {
             ParkingName,
@@ -55,7 +64,8 @@ const CreateParking = () => {
             FourWheelsStatus,
             TwoWheelsPrice,
             TwoWheelsStatus,
-            username
+            username,
+            ParkingAddress
         }
     
 

@@ -46,7 +46,7 @@ const MyParkingPage = () => {
                                 {/*<img className="w-[300px] h-[150px] object-cover rounded-md" src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&h=1280&q=80"/>*/}
                                 <div className="px-3 py-2">
                                     <div className="py-2 overflow-ellipsis truncate text-2xl">{myparking.ParkingName}</div>
-                                    <div className="py-2 overflow-ellipsis truncate text-xs"><ReverseGeocoding long={myparking.Lng} lat={myparking.Lat} /> </div>
+                                    <div className="py-2 overflow-ellipsis truncate text-xs">{myparking.ParkingAddress}</div>
                                     {/*<VehiclesSVG />*/}
                                 </div>
                                 <div
