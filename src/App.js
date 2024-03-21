@@ -18,6 +18,7 @@ import UpdatePass from "./components/UpdatePass";
 import AdminPage from "./components/AdminPage";
 import AdminLayout from "./components/layout/AdminLayout";
 import AdminLogin from "./components/AdminLogin";
+import {AdminProtected} from "./components/adminProtected";
 
 function App() {
 
@@ -38,9 +39,9 @@ function App() {
             <Route path={'/recovery'} element={<ResetPass/>}/>
             <Route path={'/recovery/updatepass'} element={<UpdatePass/>}/>
             <Route path={'/admin/home'} element={
-                <AdminLayout>
+                <AdminProtected>
                     <AdminPage/>
-                </AdminLayout>
+                </AdminProtected>
             }/>
             <Route path={'/admin'} element={<AdminLogin/>}/>
         </Routes>
