@@ -13,6 +13,11 @@ import {ToastContainer} from "react-toastify";
 import AccountPage from "./components/AccountPage";
 import {Protected} from "./components/protected";
 import MyParkingPage from "./components/MyParkingPage";
+import ResetPass from "./components/ResetPass";
+import UpdatePass from "./components/UpdatePass";
+import AdminPage from "./components/AdminPage";
+import AdminLayout from "./components/layout/AdminLayout";
+import AdminLogin from "./components/AdminLogin";
 
 function App() {
 
@@ -30,6 +35,14 @@ function App() {
             <Route path={'/parking'} element={<ParkingPage/>}/>
             <Route path={'/login'} element={<Login/>}/>
             <Route path={'/signup'} element={<SignUp/>}/>
+            <Route path={'/recovery'} element={<ResetPass/>}/>
+            <Route path={'/recovery/updatepass'} element={<UpdatePass/>}/>
+            <Route path={'/admin/home'} element={
+                <AdminLayout>
+                    <AdminPage/>
+                </AdminLayout>
+            }/>
+            <Route path={'/admin'} element={<AdminLogin/>}/>
         </Routes>
       </BrowserRouter>
     </div>

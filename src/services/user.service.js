@@ -101,3 +101,52 @@ export const addUser = async (payload) => {
     const apiResponse = axios.post(getAddUserEndpoint,payload)
     return apiResponse
 }
+
+export const resetPass = async (payload) => {
+    const getResetPassEndpoint = `${baseURL}/resetpassword`
+    const apiResponse = axios.post(getResetPassEndpoint,payload)
+    return apiResponse
+}
+
+export const updatePass = async (payload) => {
+    const getUpdatePassEndpoint = `${baseURL}/updatepassword`
+    const apiResponse = axios.post(getUpdatePassEndpoint,payload)
+    return apiResponse
+}
+
+export const getAllReports = async () => {
+    const getAllReportsEndpoint = `${baseURL}/allreports`
+    const apiResponse = axios.get(getAllReportsEndpoint)
+    return apiResponse
+}
+
+export const getReports = async (ParkingID) => {
+    const getAllReportsEndpoint = `${baseURL}/reports/${ParkingID}`
+    const apiResponse = axios.get(getAllReportsEndpoint)
+    return apiResponse
+}
+
+export const banParking = async (id) => {
+    const banParkingEndpoint = `${baseURL}/reports/${id}`
+    const apiResponse = axios.delete(banParkingEndpoint)
+    return apiResponse
+}
+
+export const addReport = async (body) => {
+    const addReportEndpoint = `${baseURL}/report`
+    const apiResponse = axios.post(addReportEndpoint,body)
+    return apiResponse
+}
+
+export const addParkingHistory = async (payload) => {
+    const addParkingHistoryEndpoint = `${baseURL}/addparkinghistory`
+    const apiResponse = axios.post(addParkingHistoryEndpoint,payload)
+    return apiResponse
+}
+
+export const getParkingHistory = async (user) => {
+    const getParkingHistoryEndpoint = `${baseURL}/getparkinghistory/${user}`
+    const apiResponse = axios.get(getParkingHistoryEndpoint)
+    return apiResponse
+}
+
