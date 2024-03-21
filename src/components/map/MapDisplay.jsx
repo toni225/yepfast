@@ -162,7 +162,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                 </div>
                                                 <div className="flex flex-col justify-between items-center mt-2">
                                                     <button className="bg-VO-Tertiary rounded-xl w-[100px] h-[30px] text-[9px] shadow-my-shadow text-white" onClick={() => {
-                                                        setOpenAlertDialog(true);
+                                                         setOpenAlertDialog(true);
                                                         setOpenInfoWindow(false);   // setOpenInfoWindow to false to hide the popup and show the direction 
                                                         setDirections({
                                                             origin,
@@ -217,6 +217,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                 />
                             </Autocomplete>
                         )}
+                        {openAlertDialog && <AlertDialog open={openAlertDialog} handleClose={() => setOpenAlertDialog(false)} />}
                     </Map>
                 </div>
             </APIProvider>
