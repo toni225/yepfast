@@ -3,6 +3,7 @@ import { APIProvider, AdvancedMarker, InfoWindow, Map, Pin, Marker, useAdvancedM
 import { Autocomplete } from "@react-google-maps/api";
 import { LoadScript } from "@react-google-maps/api";
 import Directions from "./Directions";
+import AlertDialog from "./AlertDialog"; // Import AlertDialog component
 import { toast } from "react-toastify";
 import * as userService from '../../services/user.service';
 import {useLocation, useNavigate} from "react-router-dom";
@@ -25,6 +26,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
     const markerRef = useRef(null); // Use useRef instead of useAdvancedMarkerRef
     const autocompleteRef = useRef(null);
     const [mapCenter, setMapCenter] = useState(position);
+    const [openAlertDialog, setOpenAlertDialog] = useState(false); 
 
 
     useEffect(() => {
@@ -160,6 +162,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                 </div>
                                                 <div className="flex flex-col justify-between items-center mt-2">
                                                     <button className="bg-VO-Tertiary rounded-xl w-[100px] h-[30px] text-[9px] shadow-my-shadow text-white" onClick={() => {
+                                                         setOpenAlertDialog(true);
                                                         setOpenInfoWindow(false);   // setOpenInfoWindow to false to hide the popup and show the direction 
                                                         setDirections({
                                                             origin,
@@ -167,7 +170,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                         });
                                                         setDoDirections(true);
 
-                                                        //User's parking history
+                                                          //User's parking history
                                                         userService.addParkingHistory({
                                                             username: JSON.parse(localStorage.getItem('user')).username,
                                                             ParkingID: parseInt(parking.ParkingID)
@@ -214,6 +217,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                 />
                             </Autocomplete>
                         )}
+                        {openAlertDialog && <AlertDialog open={openAlertDialog} handleClose={() => setOpenAlertDialog(false)} />}
                     </Map>
                 </div>
             </APIProvider>
