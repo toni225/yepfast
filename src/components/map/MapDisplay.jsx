@@ -159,31 +159,21 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                     </div>
                                                 </div>
                                                 <div className="flex flex-col justify-between items-center mt-2">
-    <button 
-        className="bg-VO-Tertiary rounded-xl w-[100px] h-[30px] text-[9px] shadow-my-shadow text-white" 
-        onClick={() => {
-            setOpenInfoWindow(false);   // setOpenInfoWindow to false to hide the popup and show the direction 
-            setDirections({
-                origin,
-                destination: `${parking.Lat}, ${parking.Lng}`
-            });
-            setDoDirections(true);
+                                                    <button className="bg-VO-Tertiary rounded-xl w-[100px] h-[30px] text-[9px] shadow-my-shadow text-white" onClick={() => {
+                                                        setOpenInfoWindow(false);   // setOpenInfoWindow to false to hide the popup and show the direction 
+                                                        setDirections({
+                                                            origin,
+                                                            destination: `${parking.Lat}, ${parking.Lng}`
+                                                        });
+                                                        setDoDirections(true);
 
-            // Prompt for user's interest
-            const isInterested = window.confirm('Are you interested in this location?');
-
-            if (isInterested) {
-                // User's parking history
-                userService.addParkingHistory({
-                    username: JSON.parse(localStorage.getItem('user')).username,
-                    ParkingID: parseInt(parking.ParkingID)
-                }).then(res => console.log(res)).catch(e => console.log(e));
-            }
-        }}
-    >
-        SHOW DIRECTION
-    </button>
-</div>
+                                                          //User's parking history
+                                                        userService.addParkingHistory({
+                                                            username: JSON.parse(localStorage.getItem('user')).username,
+                                                            ParkingID: parseInt(parking.ParkingID)
+                                                        }).then(res=>console.log(res)).catch(e=>console.log(e))
+                                                    }}>SHOW DIRECTION</button>
+                                                </div>
                                             </div>
                                         </InfoWindow>
                                     )}
