@@ -23,7 +23,7 @@ export const AdminProtected = ({children}) => {
                    }catch (e) {
                        setAccessible(false)
                    }
-                   console.log(res)
+                   // console.log(res)
                }).catch(e=>setAccessible(false))
            })
            .catch(()=>{setAccessible(false)})
