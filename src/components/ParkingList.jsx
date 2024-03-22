@@ -190,6 +190,10 @@ const ParkingList = () => {
                             : ''
                     })}
                 </ul>
+                    {/* No available parking near your location message */}
+        {getUserLocation() !== false && parkingList.filter(parking => checkCircleInMarker({ lat: parking.Lat, lng: parking.Lng }, latLng, radius)).length === 0 && (
+            <h1 className="text-red-500 text-4xl text-center font-sans font-bold mb-8">No available parking near your location</h1>
+        )}
             </div>
         </Layout>
 
