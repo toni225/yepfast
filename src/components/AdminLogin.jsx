@@ -1,11 +1,54 @@
 import {Box, Button, Checkbox, Container, FormControlLabel, Grid, TextField, Typography} from "@mui/material";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useState} from "react";
+import * as userService from '../services/user.service';
+import {toast} from "react-toastify";
 
 const AdminLogin = () => {
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
-        console.log('lolol')
+        const payload = {email, password};
+
+        try {
+            const apiResponse = await userService.login(payload)
+
+            if (apiResponse.status === 201) {
+
+                const userId = apiResponse.data.data.user.id
+                localStorage.setItem('session', apiResponse.data.data.session.access_token)
+
+                try {
+                    const userInfoResponse = await userService.getUserInfo(userId)
+
+                    if (userInfoResponse.data.data.length > 0) {
+                        console.log(userInfoResponse.data.data[0])
+                        localStorage.setItem('user', JSON.stringify(userInfoResponse.data.data[0]))
+                        localStorage.setItem('isAdmin', JSON.stringify(apiResponse.data.data.user?.user_metadata.isAdmin))
+                        if (apiResponse.data.data.user?.user_metadata.isAdmin) {
+                            toast.info("Logged in as Admin");
+                        } else {
+                            toast.error('Invalid login credentials')
+                            userService.signout().then(()=>localStorage.clear());
+                        }
+                        navigate('/admin/home')
+                    } else {
+                        toast.error("Please login.")
+                        navigate('/admin')
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+            }
+        } catch (e) {
+            toast.error(e.response.data.data.message)
+        }
     }
 
     return (
@@ -31,6 +74,7 @@ const AdminLogin = () => {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        onChange={e => setEmail(e.target.value)}
                     />
                     <TextField
                         margin="normal"
@@ -41,6 +85,7 @@ const AdminLogin = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={e => setPassword(e.target.value)}
                     />
                     <Button
                         type="submit"

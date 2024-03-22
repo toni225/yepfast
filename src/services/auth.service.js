@@ -28,6 +28,8 @@ export const getUserInfo = async () => {
             return response
         }
 
+        return null
+
     }catch (e) {
         return e
     }
