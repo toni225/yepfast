@@ -73,22 +73,31 @@ const ParkingList = () => {
                         <img src={gps} class="object-contain h-20 w-20" alt=""></img>
                     </div> */}
 
-                <div className="mt-10 flex justify-center -mb-10">
-                    <div className="flex items-center">
-                        <button onClick={()=>navigate('/parking')}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#262341" className="object-contain h-20 w-20 mx-auto transition-transform duration-300 transform hover:scale-110">
-                          <path fillRule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clipRule="evenodd" />
-                        </svg>
+                <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+                    <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" /*{border: "1px dashed purple"}*/, paddingTop: "3rem"}}>
+                        <button className="w-24 h-24" onClick={()=>navigate('/parking')}>
+                            <div className="flex justify-center relative w-24 h-24" /*style={{border: "1px dashed black"}}*/ >
+                                <div className="absolute inset-0 flex items-center justify-center rounded-full h-13 w-13 bg-VO-Secondary animate-ping"></div>
+                                <div className="absolute inset-0 flex items-center justify-center rounded-full bg-VO-Secondary"></div>
+                                {/* This div represents the pulsating circle */}
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#262341" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain h-16 w-16">
+                                    {/* Your SVG icon */}
+                                    <path fillRule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clipRule="evenodd" />
+                                </svg>
+                            </div>
                             {/* <img src={gps} className="object-contain h-20 w-20 mx-auto transition-transform duration-300 transform hover:scale-110" alt=""></img> */}
-                            <h1 className="text-slate-800 text-2xl text-center font-sans font-bold mb-8">Explore Parkings</h1>
+                            
                         </button>
+                        <h1 className="text-slate-800 text-3xl text-center font-['Poppins'] font-bold mb-5 mt-10">Click to Locate Parking or Check Below</h1>
                     </div>
                 </div>
 
-                <hr className="m-5 border-slate-500"/>
-                <h1 className="text-black-500 text-4xl text-center font-sans font-bold mb-8">Parking Lots Near You</h1>
+                {/* <hr className="m-1 border-slate-500"/> */}
+                <div className="py-5 bg-sky-50">
+                {/* <h1 className="text-black-500 text-4xl text-center font-sans font-bold mb-8">Parking Lots Near You</h1> */}
 
                     <div className="flex justify-end mr-10"> {/*Radius Menu*/}
+                    {/* <h1 className="text-black-500 text-xl text-center font-sans font-bold mb-8 ml-5">Parking Lots Near You</h1> */}
                     <FormControl sx={{ m: 1, minWidth: 80 }}> 
                     <InputLabel id="demo-simple-select-autowidth-label">Radius</InputLabel>
                     <Select
@@ -109,20 +118,20 @@ const ParkingList = () => {
                 </FormControl>
                     </div>
 
-                <ul role="list" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-4 pr-10 pl-10">
-                    {getUserLocation() != false && parkingList.map((parking)=>{
+                    <ul role="list" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 pr-10 pl-10">
+                        {getUserLocation() != false && parkingList.map((parking)=>{
                         return checkCircleInMarker({lat:parking.Lat,lng:parking.Lng},latLng,radius)
                             ?
                              (
                                  
-                                    <li key={parking.ParkingID} className="bg-VO-Secondary border-solid border rounded-md shadow-my-shadow">
+                                    <li key={parking.ParkingID} className="bg-VO-Secondary border-solid border rounded-md shadow-my-shadow min-w-auto">
                                         <div className=" overflow-ellipsis truncate" >
                                             <div className="flex">
                                                 <div className="m-2 w-[150px]">
                                                     <img  className="rounded-md shadow-my-shadow min-w-[150px] h-[100px]" src="https://static.stacker.com/s3fs-public/2019-03/Screen%20Shot%202019-03-14%20at%2010.49.01%20AM.png"></img>
                                                 </div>
                                                 <div className="rounded-md m-2 px-2 box-border border-1 max-h-[100px] flex flex-col overflow-hidden text-ellipsis ">
-                                                    <p className="mb-1 text-2xl overflow-hidden text-ellipsis">{parking.ParkingName}</p>
+                                                    <p className="mb-1 text-2xl overflow-hidden text-ellipsis font-['Poppins']">{parking.ParkingName}</p>
                                                     <p className="text-md my-2">
                                                         {parking.ParkingStatus ?
                                                             <>
@@ -190,6 +199,12 @@ const ParkingList = () => {
                             : ''
                     })}
                 </ul>
+                    {/* No available parking near your location message */}
+        {getUserLocation() !== false && parkingList.filter(parking => checkCircleInMarker({ lat: parking.Lat, lng: parking.Lng }, latLng, radius)).length === 0 && (
+            <h1 className="text-slate-500 text-2xl text-center font-['Poppins'] mb-8">No Nearby Parking Lot is Found, Try Adjusting Your Radius</h1>
+
+        )}
+            </div>
             </div>
         </Layout>
 
