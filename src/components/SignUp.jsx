@@ -59,7 +59,7 @@ const SignUp = () => {
                 <div className="absolute inset-0 flex items-center justify-center z-20">
                 <div className="w-[426px] h-[620px] relative bg-amber-300 rounded-[20px]">
                     <div className="w-[125px] h-[125px] left-[151px] top-[142px] absolute" />
-                    <div className="px-[62px] py-[7px] left-[113px] top-[535px] absolute bg-slate-800 rounded-[25px] border border-amber-300 justify-center items-center inline-flex" onClick={() => setIsOpen(false)}>
+                    <div className="px-[62px] py-[7px] left-[113px] top-[535px] absolute bg-slate-800 rounded-[25px] border border-amber-300 justify-center items-center inline-flex hover:cursor-pointer hover:transform hover:scale-125 transition-transform duration-300" onClick={() => setIsOpen(false)}>
                         <div className="text-amber-300 text-2xl font-bold font-['Poppins']">Select</div>
                     </div>
                         <div className="left-[150px] top-[100px] absolute">
@@ -84,7 +84,7 @@ const SignUp = () => {
                     </div>
                     <div className="w-[426px] h-[620px] relative bg-slate-800 rounded-[20px] ml-4">
                         <div className="w-[150px] h-[150px] left-[138px] top-[121px] absolute" />
-                        <div className="px-[62px] py-[7px] left-[113px] top-[535px] absolute bg-amber-300 rounded-[25px] border border-amber-300 justify-center items-center inline-flex" onClick={() => handleSelectClick(true)}>
+                        <div className="px-[62px] py-[7px] left-[113px] top-[535px] absolute bg-amber-300 rounded-[25px] border border-amber-300 justify-center items-center inline-flex hover:cursor-pointer hover:transform hover:scale-125 transition-transform duration-300" onClick={() => handleSelectClick(true)}>
                         <div className="text-slate-800 text-2xl font-bold font-['Poppins']">Select</div>
                     </div>
                         <div className="left-[140px] top-[100px] absolute">
