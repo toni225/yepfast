@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import * as userService from '../../services/user.service';
 import {useLocation, useNavigate} from "react-router-dom";
 
+import * as authService from '../../services/auth.service';
+
 const libraries = ["places"]; // Declare libraries as a constant variable
 
 const MapDisplay = ({ data = [], page, markedLocation }) => {
@@ -171,10 +173,13 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                         setDoDirections(true);
 
                                                           //User's parking history
-                                                        userService.addParkingHistory({
-                                                            username: JSON.parse(localStorage.getItem('user')).username,
-                                                            ParkingID: parseInt(parking.ParkingID)
-                                                        }).then(res=>console.log(res)).catch(e=>console.log(e))
+                                                        if(localStorage.getItem('user')!=null && authService.getUserInfo() != null){
+                                                            userService.addParkingHistory({
+                                                                username: JSON.parse(localStorage.getItem('user'))?.username,
+                                                                ParkingID: parseInt(parking.ParkingID)
+                                                            }).then(res=>console.log(res)).catch(e=>console.log(e))
+                                                        }
+
                                                     }}>SHOW DIRECTION</button>
                                                 </div>
                                             </div>
