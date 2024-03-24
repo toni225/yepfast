@@ -11,7 +11,18 @@ const SignUp = () => {
     const [isParkingOwner, setIsParkingOwner] = useState(false);
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(true);
-    
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+
+    const validateEmail = (email) => {
+        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[-a-zA-Z0-9]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,63})+$/;
+        return emailRegex.test(email);
+    }
+
+    const validatePassword = (password) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        return passwordRegex.test(password);
+    };
 
     const getData = (data) => {
         setEmail(data.email);
@@ -20,6 +31,19 @@ const SignUp = () => {
 
     const submitForm = async (e) => {
         e.preventDefault();
+
+        setEmailError('');
+        setPasswordError('');
+
+        if(!validateEmail(email)) {
+            setEmailError('Please enter a valid email address');
+            return;
+        }
+
+        if(!validatePassword(password)) {
+            setPasswordError('Password should contain at least 1 character and 1 numeric, with a minimum length of 8 characters');
+            return;
+        }
 
         const payload = {
             email,
@@ -105,7 +129,9 @@ const SignUp = () => {
                     PFASt
                 </h3>
                 <p className="text-VO-Tertiary text-center font-semibold rtl:ml-5">Registration</p>
-                <CredentialForm data={getData} />
+                <CredentialForm data={getData} validationErrors={{emailError, passwordError}}/>
+                {/* {emailError && <span style={{ color: 'red' }}>{emailError}</span>}
+                {passwordError && <span style={{ color: 'red' }}>{passwordError}</span>} */}
                 {/* <div className="flex items-center justify-center pb-5">
                     <input type="checkbox" onClick={() => setIsParkingOwner(!isParkingOwner)} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" />
                     <label className="pl-2 text-VO-Tertiary">Parking Owner</label>
