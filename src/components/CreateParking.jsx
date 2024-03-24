@@ -58,14 +58,22 @@ const CreateParking = () => {
         const payload = {
             ParkingName,
             ParkingStatus,
-            Lat,
-            Lng,
-            FourWheelsPrice,
-            FourWheelsStatus,
-            TwoWheelsPrice,
-            TwoWheelsStatus,
             username,
-            ParkingAddress
+            ParkingLocation: {
+                Lat,
+                Lng,
+                Address: ParkingAddress,
+            },
+            FourWheelsDetails: {
+                Price: 0,
+                Status: false,
+                Space: 0,
+            },
+            TwoWheelsDetails: {
+                Price: 0,
+                Status: false,
+                Space: 0,
+            }
         }
     
 
