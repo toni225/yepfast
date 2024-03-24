@@ -27,6 +27,7 @@ const CreateParking = () => {
     const [TwoWheelsStatus,setTwoWheelsStatus] = useState(false)
     const [ParkingSpace,setParkingSpace] = useState(0)
     const [filename, setFilename] = useState('No File Chosen')
+    const [ParkingAddress,setParkingAddress] = useState('')
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -40,20 +41,26 @@ const CreateParking = () => {
         setLng(loc.lng)
     }
 
+    const setAddress = async () => {
+        const {data: {display_name}} = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${Lat}&lon=${Lng}&format=json`)
+
+        if(!display_name) {
+            return console.log('Geocoding error.')
+        }
+
+        setParkingAddress(display_name)
+    }
+
     const submitForm = async (e) => {
         e.preventDefault()
 
-        const {data: {address}} = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${Lat}&lon=${Lng}&format=json`)
 
-        if(!address) {
-            return console.log('Geocoding error.')
-        }
 
         const formData = new FormData()
         formData.append('image',imageRef.current.files[0])
         formData.append('parkingName',ParkingName)
         setIsLoading(true)
-        const ParkingAddress = `${address?.road ? `${address?.road}, ` : ''}${address?.neighbourhood ? `${address?.neighbourhood}, `: ''}${address?.hamlet ? `${address?.hamlet}, `: ''}${address?.village ? `${address?.village}, `: ''}${address?.city ? `${address?.city} City`: ''}`
+        // const ParkingAddress = `${address?.road ? `${address?.road}, ` : ''}${address?.neighbourhood ? `${address?.neighbourhood}, `: ''}${address?.hamlet ? `${address?.hamlet}, `: ''}${address?.village ? `${address?.village}, `: ''}${address?.city ? `${address?.city} City`: ''}`
 
         const payload = {
             ParkingName,
@@ -133,8 +140,7 @@ const CreateParking = () => {
                                 id="parking_lat"
                                 // className="bg-gray-50 border borde   r-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 className="bg-slate-200 border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                value={Lat}
-                                onChange={e => setLat(e.target.value)}
+                                value={ParkingAddress}
                                 placeholder="Location"
                                 readOnly
                                 style={{ pointerEvents: 'none' }}
@@ -276,7 +282,7 @@ const CreateParking = () => {
                                     type="button"
                                     onClick={() => {
                                         setShowModal(false);
-                                        console.log(Lat,Lng)
+                                        setAddress();
                                     }}
                                 >
                                     Save Changes
