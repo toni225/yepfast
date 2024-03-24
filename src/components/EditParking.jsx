@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import {useNavigate, useParams} from "react-router-dom";
 import MapDisplay from "./map/MapDisplay";
+import axios from "axios";
 
 
 const EditParking = () => {
@@ -21,6 +22,8 @@ const EditParking = () => {
     const [TwoWheelsPrice,setTwoWheelsPrice] = useState(0)
     const [TwoWheelsStatus,setTwoWheelsStatus] = useState(false)
     const [ParkingSpace,setParkingSpace] = useState(0)
+    const [ParkingAddress,setParkingAddress] = useState("")
+
 
     const markedLocation = (loc) => {
         setLat(loc.lat)
@@ -32,14 +35,17 @@ const EditParking = () => {
             const {data:{parking}} = await userServices.getParking(id)
 
             setParkingName(parking[0].ParkingName)
-            setParkingStatus(parking[0].ParkingStatus)
-            setLat(parking[0].Lat)
-            setLng(parking[0].Lng)
-            setFourWheelsPrice(parking[0].FourWheelsPrice)
-            setFourWheelsStatus(parking[0].FourWheelsStatus)
-            setTwoWheelsPrice(parking[0].TwoWheelsPrice)
-            setTwoWheelsStatus(parking[0].TwoWheelsStatus)
-            setParkingSpace(parking[0].ParkingSpace)
+            setLat(parking[0].ParkingLocation.Lat)
+            setLng(parking[0].ParkingLocation.Lng)
+            setParkingAddress(parking[0].ParkingLocation.Address)
+            // setParkingStatus(parking[0].ParkingStatus)
+            // setLat(parking[0].Lat)
+            // setLng(parking[0].Lng)
+            // setFourWheelsPrice(parking[0].FourWheelsPrice)
+            // setFourWheelsStatus(parking[0].FourWheelsStatus)
+            // setTwoWheelsPrice(parking[0].TwoWheelsPrice)
+            // setTwoWheelsStatus(parking[0].TwoWheelsStatus)
+            // setParkingSpace(parking[0].ParkingSpace)
 
         }catch (e) {
 
@@ -50,18 +56,30 @@ const EditParking = () => {
         fetchUser()
     },[id])
 
+    const changeNewAddress = async () => {
+        const {data: {display_name}} = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${Lat}&lon=${Lng}&format=json`)
+        // const newParkingAddress = `${address?.road ? `${address?.road}, ` : ''}${address?.neighbourhood ? `${address?.neighbourhood}, `: ''}${address?.hamlet ? `${address?.hamlet}, `: ''}${address?.village ? `${address?.village}, `: ''}${address?.city ? `${address?.city} City`: ''}`
+
+        setParkingAddress(display_name)
+    }
+
     const submitForm = async (e) => {
         e.preventDefault()
 
         const payload = {
             ParkingName,
-            ParkingStatus,
-            Lat,
-            Lng,
-            FourWheelsPrice,
-            FourWheelsStatus,
-            TwoWheelsPrice,
-            TwoWheelsStatus,
+            ParkingLocation: {
+                Lat,
+                Lng,
+                Address: ParkingAddress,
+            },
+            // ParkingStatus,
+            // Lat,
+            // Lng,
+            // FourWheelsPrice,
+            // FourWheelsStatus,
+            // TwoWheelsPrice,
+            // TwoWheelsStatus,
         }
 
         try{
@@ -156,8 +174,7 @@ const EditParking = () => {
                                 id="parking_lat"
                                 // className="bg-gray-50 border borde   r-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 className="bg-slate-200 border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                value={Lat}
-                                onChange={e => setLat(e.target.value)}
+                                value={ParkingAddress}
                                 placeholder="Location"
                                 readOnly
                                 style={{ pointerEvents: 'none' }}
@@ -174,9 +191,6 @@ const EditParking = () => {
                         </div>
                     </div>
 
-            
-                    </form>
-        
                     <hr className="border-slate-500 max-w-sm mx-auto m-5"/>
                     <div className="max-w-sm mx-auto flex justify-between">
                         <button
@@ -194,6 +208,8 @@ const EditParking = () => {
                         </button>
 
                     </div>
+                    </form>
+
                 </div>
 
             </div>
@@ -236,7 +252,8 @@ const EditParking = () => {
                                     type="button"
                                     onClick={() => {
                                         setShowModal(false);
-                                        console.log(Lat,Lng)
+                                        changeNewAddress()
+                                        // console.log(Lat,Lng)
                                     }}
                                 >
                                     Save Changes
