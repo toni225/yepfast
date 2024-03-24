@@ -12,7 +12,19 @@ const Login = () => {
   const [loading,setIsLoading] = useState(false)
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
+
+  const validateEmail = (email) => {
+      const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[-a-zA-Z0-9]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,63})+$/;
+      return emailRegex.test(email);
+  }
+
+  const validatePassword = (password) => {
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      return passwordRegex.test(password);
+  };
   const getData = (data) => {
     setEmail(data.email)
     setPassword(data.password)
@@ -21,6 +33,22 @@ const Login = () => {
   const submitForm = async (e) => {
     e.preventDefault()
     setIsLoading(true)
+
+    setEmailError('');
+    setPasswordError('');
+
+    if(!validateEmail(email)) {
+        setEmailError('Please enter a valid email address');
+        setIsLoading(false)
+        return;
+    }
+
+    if(!validatePassword(password)) {
+        setPasswordError('Password should contain at least 1 character and 1 numeric, with a minimum length of 8 characters');
+        setIsLoading(false)
+        return;
+    }
+
     const payload = {
       email,password
     }
@@ -73,7 +101,7 @@ const Login = () => {
         <h3 className="block font-sans text-7xl antialiased text-VO-Tertiary text-center mt-5">
           PFASt
         </h3>
-        <CredentialForm data={getData}/>
+        <CredentialForm data={getData} validationErrors={{emailError, passwordError}}/>
         <div className="p-6 pt-0">
           <center>
             <button
