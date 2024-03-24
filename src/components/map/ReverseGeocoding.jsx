@@ -18,7 +18,7 @@ const ReverseGeocoding = (props) => {
             setAddress(data.display_name)
         })
         .catch(err => console.warn(err.message))
-    })
+    },[])
 
     return ( 
         <div>{address}</div>
