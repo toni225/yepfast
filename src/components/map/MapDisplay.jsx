@@ -29,6 +29,8 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
     const autocompleteRef = useRef(null);
     const [mapCenter, setMapCenter] = useState(position);
     const [openAlertDialog, setOpenAlertDialog] = useState(false); 
+    const infoWindowTimeoutRef = useRef(null); // Ref for the timeout
+
 
 
     useEffect(() => {
@@ -50,7 +52,8 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
     //Clicking navigate in ParkingList
     useEffect(()=>{
         if(state !== null){
-            setOpenInfoWindow(true);
+            // setOpenInfoWindow(true);
+            handleOpenInfoWindow();
             setSelectedMarker(state.parkingId);
             getParkingImage(state.username, state.parkingName);
         }else{
@@ -89,6 +92,22 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
         }
     };
 
+    // Function to handle opening InfoWindow
+    const handleOpenInfoWindow = () => {
+        setOpenInfoWindow(true);
+        // Set up the timeout to trigger after 5 minutes
+        infoWindowTimeoutRef.current = setTimeout(() => {
+            setOpenAlertDialog(true);
+        }, 1 * 60 * 1000); // 5 minutes in milliseconds
+    };
+
+    // Function to handle closing InfoWindow
+    const handleCloseInfoWindow = () => {
+        setOpenInfoWindow(false);
+        // Clear the timeout if the InfoWindow is closed before the timeout
+        clearTimeout(infoWindowTimeoutRef.current);
+    };
+
     const mapRef = useRef(null);
 
     return (
@@ -114,7 +133,8 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                 <AdvancedMarker
                                     ref={markerRef}
                                     onClick={(e) => {
-                                        setOpenInfoWindow(true);
+                                        // setOpenInfoWindow(true);
+                                        handleOpenInfoWindow();
                                         setSelectedMarker(parking.ParkingID);
                                         getParkingImage(parking.username.username, parking.ParkingName);
                                         setDoDirections(false);     // set to false to hide directions when clicking a marker or another marker
@@ -132,7 +152,8 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                             maxWidth={400}
                                             position={{ lat: parseFloat(parking.ParkingLocation.Lat), lng: parseFloat(parking.ParkingLocation.Lng) }}
                                             onCloseClick={() => {
-                                                setOpenInfoWindow(false);
+                                                // setOpenInfoWindow(false);
+                                                handleCloseInfoWindow(); // Call handleCloseInfoWindow when closing InfoWindow
                                                 setDoDirections(false);
                                                 setDirections('');
                                             }}
@@ -166,7 +187,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                 </div>
                                                 <div className="flex flex-col justify-between items-center mt-2">
                                                     <button className="bg-VO-Tertiary rounded-xl w-[100px] h-[30px] text-[9px] shadow-my-shadow text-white" onClick={() => {
-                                                         setOpenAlertDialog(true);
+                                                        //  setOpenAlertDialog(true);
                                                         setOpenInfoWindow(false);   // setOpenInfoWindow to false to hide the popup and show the direction 
                                                         setDirections({
                                                             origin,
