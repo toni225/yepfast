@@ -16,6 +16,7 @@ const ParkingList = () => {
     const [parkingList,setParkingList] = useState([])
     const [latLng, setLatLng] = useState({})
     const [radius, setRadius] = useState(500); // Define age state variable here
+    const [userLocationAvailable, setUserLocationAvailable] = useState(false);
 
     const handleChange = (event) => {
         const selectedValue = event.target.value;
@@ -52,16 +53,24 @@ const ParkingList = () => {
 
     //getting VO's current location. returns false if not and setting location if VO turns on location.
     const getUserLocation = () => {
-        if(navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(pos=>{
-                setLatLng({lat:pos.coords.latitude,lng:pos.coords.longitude})
-            },err => {
-                return false
-            })
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                pos => {
+                    setLatLng({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+                    setUserLocationAvailable(true); // Set userLocationAvailable to true if location is obtained
+                },
+                err => {
+                    setUserLocationAvailable(false); // Set userLocationAvailable to false if there's an error obtaining location
+                }
+            );
+        } else {
+            setUserLocationAvailable(false); // Set userLocationAvailable to false if geolocation is not supported
         }
-    }
+    };
 
     useEffect(()=>{
+        const locationAvailable = getUserLocation();
+        setUserLocationAvailable(locationAvailable);
         fetchUser()
     },[])
 
@@ -200,8 +209,18 @@ const ParkingList = () => {
                     })}
                 </ul>
                     {/* No available parking near your location message */}
-        {getUserLocation() !== false && parkingList.filter(parking => checkCircleInMarker({ lat: parking.Lat, lng: parking.Lng }, latLng, radius)).length === 0 && (
-            <h1 className="text-slate-500 text-2xl text-center font-['Poppins'] mb-8">No Nearby Parking Lot is Found, Try Adjusting Your Radius</h1>
+                    {userLocationAvailable && 
+    parkingList.length > 0 && // Ensure there are parking lots to check
+    parkingList.filter(parking => {
+        if (getUserLocation() !== false) {
+            return checkCircleInMarker({ lat: parking.ParkingLocation.Lat, lng: parking.ParkingLocation.Lng }, latLng, radius);
+        } else {
+            return false; // Return false if user location is not available
+        }
+    }).length === 0 && (
+        <h1 className="text-slate-500 text-2xl text-center font-['Poppins'] mb-8">
+            No Nearby Parking Lot is Found, Try Adjusting Your Radius
+        </h1>
 
         )}
             </div>
