@@ -22,9 +22,10 @@ const Login = () => {
   }
 
   const validatePassword = (password) => {
-      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%^*#?&]{8,}$/;
       return passwordRegex.test(password);
   };
+  
   const getData = (data) => {
     setEmail(data.email)
     setPassword(data.password)
@@ -44,7 +45,7 @@ const Login = () => {
     }
 
     if(!validatePassword(password)) {
-        setPasswordError('Password should contain at least 1 character and 1 numeric, with a minimum length of 8 characters');
+        setPasswordError('Password should be atleast 8 characters and include at least 1 letter, 1 number and 1 special character!');
         setIsLoading(false)
         return;
     }

@@ -18,9 +18,9 @@ const SignUp = () => {
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[-a-zA-Z0-9]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,63})+$/;
         return emailRegex.test(email);
     }
-
+  
     const validatePassword = (password) => {
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%^*#?&]{8,}$/;
         return passwordRegex.test(password);
     };
 
@@ -41,7 +41,7 @@ const SignUp = () => {
         }
 
         if(!validatePassword(password)) {
-            setPasswordError('Password should contain at least 1 character and 1 numeric, with a minimum length of 8 characters');
+            setPasswordError('Password should be atleast 8 characters and include at least 1 letter, 1 number and 1 special character!');
             return;
         }
 
