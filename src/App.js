@@ -19,6 +19,7 @@ import AdminPage from "./components/AdminPage";
 import AdminLayout from "./components/layout/AdminLayout";
 import AdminLogin from "./components/AdminLogin";
 import {AdminProtected} from "./components/adminProtected";
+import CredentialFormLatest from "./components/layout/CredentialFormLatest";
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
                 </AdminProtected>
             }/>
             <Route path={'/admin'} element={<AdminLogin/>}/>
+            <Route path={'/test/'} element={<CredentialFormLatest/>}/>
         </Routes>
       </BrowserRouter>
     </div>
