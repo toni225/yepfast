@@ -185,8 +185,7 @@ const SignUpV2 = () => {
                                         fullWidth
                                         required
                                         autoFocus
-                                        onBlur={() => { setEmailError('') }}    // if error occur then not focus on input, remove error.
-                                        onChange={e => setEmail(e.target.value)}
+                                        onChange={(e) => {setEmail(e.target.value); setEmailError('')}}  // if changed then remove error
                                     />
                                     <TextField
                                         error={passwordError}   //set error flag
@@ -200,8 +199,7 @@ const SignUpV2 = () => {
                                         size="small"
                                         required
                                         fullWidth
-                                        onBlur={() => { setPasswordError('') }}   // if error occur then not focus on input, remove error.
-                                        onChange={e => setPassword(e.target.value)}
+                                        onChange={(e) => {setPassword(e.target.value); setPasswordError('')}}  // if changed then remove error
                                     />
                                     <Button
                                         type="submit"
@@ -253,8 +251,7 @@ const SignUpV2 = () => {
                                         required
                                         fullWidth
                                         autoFocus
-                                        onBlur={() => { setEmailError('') }}    // if error occur then not focus on input, remove error.
-                                        onChange={e => setEmail(e.target.value)}
+                                        onChange={(e) => {setEmail(e.target.value); setEmailError('')}}  // if changed then remove error
                                     />
                                     <TextField
                                         error={passwordError}   //set error flag
@@ -268,8 +265,7 @@ const SignUpV2 = () => {
                                         required
                                         fullWidth
                                         autoComplete="current-password"
-                                        onBlur={() => { setPasswordError('') }}   // if error occur then not focus on input, remove error.
-                                        onChange={e => setPassword(e.target.value)}
+                                        onChange={(e) => {setPassword(e.target.value); setPasswordError('')}}  // if changed then remove error
                                     />
                                     <Button
                                         type="submit"
