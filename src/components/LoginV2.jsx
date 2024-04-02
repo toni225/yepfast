@@ -1,13 +1,13 @@
+import * as userService from '../services/user.service'
 import React, { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel, Typography, Link } from '@mui/joy';
 import { Box, Button, TextField, Container } from '@mui/material';
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { VehicleOwnerIcon, ParkingOwnerIcon } from "./PFAStIcon";
-import * as userService from '../../services/user.service';
+import { VehicleOwnerIcon, ParkingOwnerIcon } from "./layout/PFAStIcon";
 
 
-const CredentialFormLatest = () => {
+const LoginV2 = () => {
   const navigate = useNavigate()
   const [selectedTab, setSelectedTab] = useState(0);
   const [email, setEmail] = useState('');
@@ -272,4 +272,4 @@ const CredentialFormLatest = () => {
   );
 }
 
-export default CredentialFormLatest;
+export default LoginV2;
