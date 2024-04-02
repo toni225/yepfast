@@ -103,7 +103,7 @@ const LoginV2 = () => {
         value={selectedTab}
         onChange={handleTabChange}
         sx={{
-          width: '500px',
+          width: '400px',
           borderRadius: 'lg',
           boxShadow: 'sm',
           overflow: 'auto',
