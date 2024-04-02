@@ -7,7 +7,6 @@ import CreateParking from "./components/CreateParking";
 import MyParking from "./components/MyParking";
 import EditParking from "./components/EditParking";
 import ParkingPage from "./components/layout/ParkingPage";
-import Login from "./components/Login"
 import SignUp from "./components/SignUp";
 import {ToastContainer} from "react-toastify";
 import AccountPage from "./components/AccountPage";
@@ -19,7 +18,7 @@ import AdminPage from "./components/AdminPage";
 import AdminLayout from "./components/layout/AdminLayout";
 import AdminLogin from "./components/AdminLogin";
 import {AdminProtected} from "./components/adminProtected";
-import CredentialFormLatest from "./components/layout/CredentialFormLatest";
+import LoginV2 from "./components/LoginV2";
 
 function App() {
 
@@ -35,7 +34,7 @@ function App() {
             <Route path={'/myparking/:id'} element={<Protected><MyParking/></Protected>}/>
             <Route path={'/myparking/:id/edit'} element={<Protected><EditParking/></Protected>}/>
             <Route path={'/parking'} element={<ParkingPage/>}/>
-            <Route path={'/login'} element={<Login/>}/>
+            <Route path={'/login'} element={<LoginV2/>}/>
             <Route path={'/signup'} element={<SignUp/>}/>
             <Route path={'/recovery'} element={<ResetPass/>}/>
             <Route path={'/recovery/updatepass'} element={<UpdatePass/>}/>
@@ -45,7 +44,6 @@ function App() {
                 </AdminProtected>
             }/>
             <Route path={'/admin'} element={<AdminLogin/>}/>
-            <Route path={'/test/'} element={<CredentialFormLatest/>}/>
         </Routes>
       </BrowserRouter>
     </div>
