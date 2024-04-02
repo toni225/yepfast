@@ -122,12 +122,16 @@ const LoginV2 = () => {
             fontWeight: 'lg',
           }}
         >
-          <Tab disableIndicator variant="standard" sx={{ flex: selectedTab === 0 ? '65%' : '35%', transition: 'all 0.5s ease-out' }} className="vehicle-owner-tab">
-            <VehicleOwnerIcon size={25} />
+          <Tab disableIndicator variant="standard" sx={{  flex: selectedTab === 0 ? '65%' : '35%', transition: 'all 0.5s ease-out' }} className="vehicle-owner-tab">
+            <Box sx={{padding: '0px 8px'}}>
+              <VehicleOwnerIcon size={25}/> 
+            </Box>
             Vehicle Owner
           </Tab>
           <Tab disableIndicator variant="standard" sx={{ flex: selectedTab === 1 ? '65%' : '35%', transition: 'all 0.5s ease-out' }} className="parking-owner-tab">
-            <ParkingOwnerIcon size={25} />
+            <Box sx={{padding: '0px 8px'}}>
+              <ParkingOwnerIcon size={25}/> 
+            </Box>
             Parking Owner
           </Tab>
         </TabList>
@@ -138,7 +142,7 @@ const LoginV2 = () => {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
-              minHeight: '60vh'
+              minHeight: '40vh'
             }}>
               <VehicleOwnerIcon size={75} />
               <Typography component="h1" variant="h5" sx={{ color: '#010101', fontWeight: 'lg' }}>
@@ -154,6 +158,7 @@ const LoginV2 = () => {
                   type='email'
                   name="email"
                   autoComplete="email"
+                  size="small"
                   fullWidth
                   required
                   autoFocus
@@ -169,6 +174,7 @@ const LoginV2 = () => {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  size="small"
                   required
                   fullWidth
                   onBlur={() => { setPasswordError('') }}   // if error occur then not focus on input, remove error.
@@ -203,7 +209,7 @@ const LoginV2 = () => {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
-              minHeight: '60vh'
+              minHeight: '40vh'
             }}>
               <ParkingOwnerIcon size={75} />
               <Typography component="h1" variant="h5" sx={{ color: '#E7F5F5', fontWeight: 'lg' }}>
@@ -225,6 +231,7 @@ const LoginV2 = () => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  size="small"
                   required
                   fullWidth
                   autoFocus
@@ -234,14 +241,15 @@ const LoginV2 = () => {
                 <TextField
                   error={passwordError}   //set error flag
                   helperText={passwordError ? passwordError : ''}  // if password error is then show error, else show none
-                  margin="normal"
-                  required
-                  fullWidth
                   name="password"
                   label="Password"
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  margin="normal"
+                  size="small"
+                  required
+                  fullWidth
                   onBlur={() => { setPasswordError('') }}   // if error occur then not focus on input, remove error.
                   onChange={e => setPassword(e.target.value)}
                 />
