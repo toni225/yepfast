@@ -78,7 +78,8 @@ const AdminPage = () => {
                                         <td className={'text-center'}>{i[0].ParkingDetails.ParkingName}</td>
                                         <td className={'text-center'}>{i.length}</td>
                                         <td className={'flex gap-2 justify-center'}>
-                                            <AdminReportDetailsComponent ParkingID={i[0].ParkingID}/>
+                                            {/* <AdminReportDetailsComponent ParkingID={i[0].ParkingID}/> */}
+                                            <AdminReportDetailsComponent parkingData={i[0]} ParkingID={i[0].ParkingID} />
                                         </td>
                                     </tr>
                                 )
