@@ -31,24 +31,40 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
     const [openAlertDialog, setOpenAlertDialog] = useState(false); 
     const infoWindowTimeoutRef = useRef(null); // Ref for the timeout
 
-    const [watchId,setWatchId] = useState(0);
-    
+    // const [watchId,setWatchId] = useState(0);
+    // const [reqCount,setReqCount] = useState(0);
+
+    // useEffect(() => {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(pos => {
+    //             const lat = pos.coords.latitude;
+    //             const lng = pos.coords.longitude;
+    //             setOrigin(`${lat}, ${lng}`);
+    //         }, err => {
+    //             setOrigin('10.32546837125536, 123.95334301842492');
+    //             console.log(err);
+    //             toast.warning('Location is turned off.');
+    //         });
+    //     } else {
+    //         setOrigin('10.32546837125536, 123.95334301842492');
+    //     }
+    // }, []);
 
     useEffect(() => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(pos => {
-                const lat = pos.coords.latitude;
-                const lng = pos.coords.longitude;
-                setOrigin(`${lat}, ${lng}`);
-            }, err => {
-                setOrigin('10.32546837125536, 123.95334301842492');
-                console.log(err);
-                toast.warning('Location is turned off.');
-            });
-        } else {
-            setOrigin('10.32546837125536, 123.95334301842492');
-        }
-    }, []);
+        const watchId = navigator.geolocation.watchPosition(
+          position => {
+            const { latitude, longitude } = position.coords;
+            setOrigin({ lat: latitude, lng: longitude });
+          },
+          error => {
+            console.error(error.message);
+          }
+        );
+    
+        return () => {
+          navigator.geolocation.clearWatch(watchId);
+        };
+      }, []); // Fetch user's location continuously on component mount
 
     //Clicking navigate in ParkingList
     useEffect(()=>{
@@ -138,7 +154,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                         // setOpenInfoWindow(true);
                                         handleOpenInfoWindow();
                                         setSelectedMarker(parking.ParkingID);
-                                        getParkingImage(parking.username.username, parking.ParkingName);
+                                        getParkingImage(parking.username, parking.ParkingName);
                                         setDoDirections(false);     // set to false to hide directions when clicking a marker or another marker
                                     }}
                                     position={{ lat: parseFloat(parking.ParkingLocation.Lat), lng: parseFloat(parking.ParkingLocation.Lng) }}
@@ -161,7 +177,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                             }}
                                         >
                                             <div id="container" className="m-[10px] relative">
-                                                <img className="w-[262px] h-[131px] rounded-xl border border-black" rel={"image"} src={`${CDNURL}${parking.username.username}/${parking.ParkingName}/${image}`}></img>
+                                                <img className="w-[262px] h-[131px] rounded-xl border border-black" rel={"image"} src={`${CDNURL}${parking.username}/${parking.ParkingName}/${image}`}></img>
                                                 <div className="flex flex-col justify-between items-center max-w-[250px]">
                                                     <div className="bg-VO-Secondary mt-[-20px] py-[5px] shadow-my-shadow px-[10px] rounded-full text-lg">{parking.ParkingName}</div>
                                                 </div>
@@ -191,23 +207,23 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                     <button className="bg-VO-Tertiary rounded-xl w-[100px] h-[30px] text-[9px] shadow-my-shadow text-white" onClick={() => {
                                                         //  setOpenAlertDialog(true);
                                                         setOpenInfoWindow(false);   // setOpenInfoWindow to false to hide the popup and show the direction 
-                                                        // setDirections({
-                                                        //     origin,
-                                                        //     destination: `${parking.Lat}, ${parking.Lng}`
-                                                        // });
-                                                        setWatchId(navigator.geolocation.watchPosition(pos => {
-                                                            const lat = pos.coords.latitude
-                                                            const lng = pos.coords.longitude
-                                                            setDirections({
-                                                                origin: `${lat}, ${lng}`,
-                                                                destination: `${parking.ParkingLocation.Lat}, ${parking.ParkingLocation.Lng}`
-                                                            });
-                                                            console.log('directions working')
-                                                            // setReqCount(prev=>prev+1)
-                                                        }, (err) => {
-                                                            console.log(err)
-                                                            console.log('directions stopped')
-                                                        }))
+                                                        setDirections({
+                                                            origin,
+                                                            destination: `${parking.ParkingLocation.Lat}, ${parking.ParkingLocation.Lng}`
+                                                        });
+                                                        // setWatchId(navigator.geolocation.watchPosition(pos => {
+                                                        //     const lat = parseFloat(pos.coords.latitude)
+                                                        //     const lng = parseFloat(pos.coords.longitude)
+                                                        //     setDirections({
+                                                        //         origin: `${lat},${lng}`,
+                                                        //         destination: `${parking.ParkingLocation.Lat}, ${parking.ParkingLocation.Lng}`
+                                                        //     });
+                                                        //     // console.log('directions working')
+                                                        //     setReqCount(prev=>prev+1)
+                                                        // }, (err) => {
+                                                        //     console.log(err)
+                                                        //     console.log('directions stopped')
+                                                        // }))
                                                         setDoDirections(true);
 
                                                           //User's parking history
@@ -226,7 +242,11 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                 </AdvancedMarker>
                             </div>
                         ))}
+                        {/* {doDirections && console.log(directions.origin)} */}
+
+                        {/* Calling the directions api whenever doDirections is True */}
                         {doDirections && <Directions directions={directions} />}
+                        
                         {page === "CreateParking" && marker.lat && (
                             <AdvancedMarker position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }} />
                         )}

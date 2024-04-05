@@ -43,7 +43,7 @@ const Directions = ({directions}) => {
             });
 
         return () => directionsRenderer.setMap(null);
-    }, [directions]);
+    }, [directions, directionsService, directionsRenderer]);
 
     // Update direction route
     useEffect(() => {
