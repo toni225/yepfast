@@ -31,7 +31,8 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
     const [openAlertDialog, setOpenAlertDialog] = useState(false); 
     const infoWindowTimeoutRef = useRef(null); // Ref for the timeout
 
-
+    const [watchId,setWatchId] = useState(0);
+    
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -104,6 +105,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
     // Function to handle closing InfoWindow
     const handleCloseInfoWindow = () => {
         setOpenInfoWindow(false);
+        navigator.geolocation.clearWatch(watchId);
         // Clear the timeout if the InfoWindow is closed before the timeout
         clearTimeout(infoWindowTimeoutRef.current);
     };
@@ -189,10 +191,23 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                     <button className="bg-VO-Tertiary rounded-xl w-[100px] h-[30px] text-[9px] shadow-my-shadow text-white" onClick={() => {
                                                         //  setOpenAlertDialog(true);
                                                         setOpenInfoWindow(false);   // setOpenInfoWindow to false to hide the popup and show the direction 
-                                                        setDirections({
-                                                            origin,
-                                                            destination: `${parking.Lat}, ${parking.Lng}`
-                                                        });
+                                                        // setDirections({
+                                                        //     origin,
+                                                        //     destination: `${parking.Lat}, ${parking.Lng}`
+                                                        // });
+                                                        setWatchId(navigator.geolocation.watchPosition(pos => {
+                                                            const lat = pos.coords.latitude
+                                                            const lng = pos.coords.longitude
+                                                            setDirections({
+                                                                origin: `${lat}, ${lng}`,
+                                                                destination: `${parking.ParkingLocation.Lat}, ${parking.ParkingLocation.Lng}`
+                                                            });
+                                                            console.log('directions working')
+                                                            // setReqCount(prev=>prev+1)
+                                                        }, (err) => {
+                                                            console.log(err)
+                                                            console.log('directions stopped')
+                                                        }))
                                                         setDoDirections(true);
 
                                                           //User's parking history
