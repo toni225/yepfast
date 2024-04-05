@@ -121,7 +121,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
     // Function to handle closing InfoWindow
     const handleCloseInfoWindow = () => {
         setOpenInfoWindow(false);
-        navigator.geolocation.clearWatch(watchId);
+        // navigator.geolocation.clearWatch(watchId);
         // Clear the timeout if the InfoWindow is closed before the timeout
         clearTimeout(infoWindowTimeoutRef.current);
     };
