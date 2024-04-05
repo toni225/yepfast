@@ -1,8 +1,8 @@
 import axios from "axios";
 
 //--------Change the url if what you will use
-const baseURL = "http://localhost:4000/v1/user";
-// const baseURL = "https://pfast-api.vercel.app/v1/user"
+// const baseURL = "http://localhost:4000/v1/user";
+const baseURL = "https://yepfastapi.vercel.app/v1/user";
 
 //==============================Parking APIs=========================
 export const getAllParking = async () => {
