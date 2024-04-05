@@ -1,10 +1,11 @@
-import {Box, Button, Modal, TextField} from "@mui/material";
+import {Box, Button, Modal, TextField, IconButton} from "@mui/material";
+import { XMarkIcon } from '@heroicons/react/24/solid'
 import {toast} from "react-toastify";
 import * as userService from "../../services/user.service";
 import {useState, useMemo, useEffect} from "react";
 import * as userServices from "../../services/user.service";
 
-const AdminReportDetailsComponent = ({ ParkingID }) => {
+const AdminReportDetailsComponent = ({ ParkingID, parkingData }) => {
     const style = {
         position: 'absolute',
         top: '50%',
@@ -66,7 +67,11 @@ const AdminReportDetailsComponent = ({ ParkingID }) => {
                 aria-describedby="child-modal-description"
             >
                 <Box sx={style}>
-                    <h2 id="child-modal-title">Parking Report Details</h2>
+                    <Button onClick={handleClose} style={{ position: 'absolute', top: 10, right: 10 }}>
+                        <XMarkIcon className="text-slate-600"/>
+                    </Button>
+                    <h2 className="text-gray-400 font-['Poppins']" id="child-modal-title">Parking Name:</h2>
+                    <p className="pb-6 text-gray-400 text-4xl font-['Poppins']">{parkingData.ParkingDetails.ParkingName}</p>
                     <div className='bg-gray-800' style={{ maxHeight: '60vh', overflowY: 'auto' }}>
                         {reports
                         .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
@@ -85,8 +90,7 @@ const AdminReportDetailsComponent = ({ ParkingID }) => {
                         ))}
                     </div>
                     <div className="pt-6 flex justify-end">
-                        <Button variant="contained" onClick={handleClose} style={{ marginRight: '10px' }}>Close</Button>
-                        <Button variant="contained" color="warning" onClick={() => console.log(`warning ${reports[0]?.ParkingID}`)} style={{ marginRight: '10px' }}>Warning</Button>
+                        <Button variant="contained" color="warning" onClick={() => console.log(`warning ${reports[0]?.ParkingID}`)} style={{ marginRight: '10px' }}>Warn</Button>
                         <Button variant="contained" color="error" onClick={() => banParking(reports[0]?.ReportID, reports[0]?.ParkingID)}>Ban</Button>
                     </div>
                 </Box>
