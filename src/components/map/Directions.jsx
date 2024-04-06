@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import {useMap, useMapsLibrary} from "@vis.gl/react-google-maps";
 
 
-const Directions = ({directions}) => {
+const Directions = ({directions, origin}) => {
 
     const map = useMap();
     const routesLibrary = useMapsLibrary('routes');
@@ -44,13 +44,14 @@ const Directions = ({directions}) => {
 
     //     return () => directionsRenderer.setMap(null);
     // }, [directions, directionsService, directionsRenderer]);
+
     useEffect(() => {
-        if (!directionsService || !directionsRenderer || !directions || !directions.origin || !directions.destination) return;
+        if (!directionsService || !directionsRenderer || !directions || !origin ) return;
     
         // Call Directions API with the updated origin
         directionsService
             .route({
-                origin: directions.origin,
+                origin,
                 destination: directions.destination,
                 // eslint-disable-next-line no-undef
                 travelMode: google.maps.TravelMode.DRIVING,
@@ -61,7 +62,8 @@ const Directions = ({directions}) => {
                 directionsRenderer.setOptions({
                     polylineOptions: {
                         strokeColor: '#f25f4c'
-                    }
+                    },
+                    suppressMarkers: true,
                 });
                 directionsRenderer.setDirections(response); // Update directions with new response
                 setRoutes(response.routes);
@@ -71,11 +73,13 @@ const Directions = ({directions}) => {
                 console.error('Error fetching directions:', error);
                 // Handle error
             });
+
+            console.log(origin)
     
         return () => {
             directionsRenderer.setMap(null);
         };
-    }, [directions, directionsService, directionsRenderer, map]);
+    }, [directions, origin, directionsService, directionsRenderer, map]);
 
     // Update direction route
     useEffect(() => {
@@ -84,6 +88,10 @@ const Directions = ({directions}) => {
     }, [routeIndex, directionsRenderer]);
 
     if (!leg) return null;
+
+    // useEffect(()=> {
+    //     console.log(directions, origin)
+    // },[directions, origin])
 
 
 }

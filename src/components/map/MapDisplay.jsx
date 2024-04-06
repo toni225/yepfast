@@ -33,38 +33,42 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
 
     // const [watchId,setWatchId] = useState(0);
     // const [reqCount,setReqCount] = useState(0);
-
-    // useEffect(() => {
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(pos => {
-    //             const lat = pos.coords.latitude;
-    //             const lng = pos.coords.longitude;
-    //             setOrigin(`${lat}, ${lng}`);
-    //         }, err => {
-    //             setOrigin('10.32546837125536, 123.95334301842492');
-    //             console.log(err);
-    //             toast.warning('Location is turned off.');
-    //         });
-    //     } else {
-    //         setOrigin('10.32546837125536, 123.95334301842492');
-    //     }
-    // }, []);
+    const [callDir,setCallDir] = useState(0);
+    const [timer,setTimer] = useState(null);
 
     useEffect(() => {
-        const watchId = navigator.geolocation.watchPosition(
-          position => {
-            const { latitude, longitude } = position.coords;
-            setOrigin({ lat: latitude, lng: longitude });
-          },
-          error => {
-            console.error(error.message);
-          }
-        );
-    
-        return () => {
-          navigator.geolocation.clearWatch(watchId);
-        };
-      }, []); // Fetch user's location continuously on component mount
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(pos => {
+                const lat = pos.coords.latitude;
+                const lng = pos.coords.longitude;
+                setOrigin(`${lat}, ${lng}`);
+            }, err => {
+                setOrigin('10.32546837125536, 123.95334301842492');
+                console.log(err);
+                toast.warning('Location is turned off.');
+            });
+        } else {
+            setOrigin('10.32546837125536, 123.95334301842492');
+        }
+    }, [callDir]);
+
+    // useEffect(() => {
+    //     const watchId = navigator.geolocation.watchPosition(
+    //       position => {
+    //         const { latitude, longitude } = position.coords;
+    //         setOrigin({ lat: latitude, lng: longitude });
+    //       },
+    //       error => {
+    //         console.error(error.message);
+    //       }
+    //     );
+
+    //     console.log('updated!')
+    //     return () => {
+    //       navigator.geolocation.clearWatch(watchId);
+    //     };
+
+    //   }, [callDir]); // Fetch user's location continuously on component mount
 
     //Clicking navigate in ParkingList
     useEffect(()=>{
@@ -174,6 +178,8 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                 handleCloseInfoWindow(); // Call handleCloseInfoWindow when closing InfoWindow
                                                 setDoDirections(false);
                                                 setDirections('');
+                                                setCallDir(0);
+                                                clearInterval(timer);
                                             }}
                                         >
                                             <div id="container" className="m-[10px] relative">
@@ -226,6 +232,8 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                         // }))
                                                         setDoDirections(true);
 
+                                                        setTimer(setInterval(()=>{setCallDir(prev=>prev+1)},100000))
+
                                                           //User's parking history
                                                         if(localStorage.getItem('user')!=null && authService.getUserInfo() != null){
                                                             userService.addParkingHistory({
@@ -245,7 +253,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                         {/* {doDirections && console.log(directions.origin)} */}
 
                         {/* Calling the directions api whenever doDirections is True */}
-                        {doDirections && <Directions directions={directions} />}
+                        {doDirections && <Directions origin={origin} directions={directions} />}
                         
                         {page === "CreateParking" && marker.lat && (
                             <AdvancedMarker position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }} />
