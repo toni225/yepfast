@@ -21,9 +21,33 @@ const Directions = ({directions}) => {
     }, [routesLibrary, map]);
 
     // Use directions service
-    useEffect(() => {
-        if (!directionsService || !directionsRenderer) return;
+    // useEffect(() => {
+    //     if (!directionsService || !directionsRenderer) return;
 
+    //     directionsService
+    //         .route({
+    //             origin: directions.origin,
+    //             destination: directions.destination,
+    //             // eslint-disable-next-line no-undef
+    //             travelMode: google.maps.TravelMode.DRIVING,
+    //             provideRouteAlternatives: true,
+    //         })
+    //         .then(response => {
+    //             directionsRenderer.setOptions({
+    //                 polylineOptions: {
+    //                     strokeColor: '#f25f4c'
+    //                 }
+    //             })
+    //             directionsRenderer.setDirections(response);
+    //             setRoutes(response.routes);
+    //         });
+
+    //     return () => directionsRenderer.setMap(null);
+    // }, [directions, directionsService, directionsRenderer]);
+    useEffect(() => {
+        if (!directionsService || !directionsRenderer || !directions || !directions.origin || !directions.destination) return;
+    
+        // Call Directions API with the updated origin
         directionsService
             .route({
                 origin: directions.origin,
@@ -33,17 +57,25 @@ const Directions = ({directions}) => {
                 provideRouteAlternatives: true,
             })
             .then(response => {
+                console.log('Directions API response:', response);
                 directionsRenderer.setOptions({
                     polylineOptions: {
                         strokeColor: '#f25f4c'
                     }
-                })
-                directionsRenderer.setDirections(response);
+                });
+                directionsRenderer.setDirections(response); // Update directions with new response
                 setRoutes(response.routes);
+                directionsRenderer.setMap(map);
+            })
+            .catch(error => {
+                console.error('Error fetching directions:', error);
+                // Handle error
             });
-
-        return () => directionsRenderer.setMap(null);
-    }, [directions, directionsService, directionsRenderer]);
+    
+        return () => {
+            directionsRenderer.setMap(null);
+        };
+    }, [directions, directionsService, directionsRenderer, map]);
 
     // Update direction route
     useEffect(() => {
