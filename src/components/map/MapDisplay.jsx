@@ -99,14 +99,6 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
     } else {
       setOrigin("10.32546837125536, 123.95334301842492");
     }
-
-    if (callDir === 1) {
-      clearInterval(timer);
-      setDoDirections(false);
-      setOpenInfoWindow(true);
-      toast.success("Arrived!");
-      return;
-    }
   }, [callDir]);
 
   // useEffect(() => {
