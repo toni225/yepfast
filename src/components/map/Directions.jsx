@@ -73,8 +73,6 @@ const Directions = ({directions, origin}) => {
                 console.error('Error fetching directions:', error);
                 // Handle error
             });
-
-            console.log(origin)
     
         return () => {
             directionsRenderer.setMap(null);
