@@ -218,32 +218,6 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                     <button className="bg-VO-Tertiary rounded-xl w-[100px] h-[30px] text-[9px] shadow-my-shadow text-white" onClick={() => {
                                                         //  setOpenAlertDialog(true);
                                                         
-                                                        if(checkCircleInMarker(
-                                                            {
-                                                                lat: parseFloat(origin.split(',')[0]),
-                                                                lng: parseFloat(origin.split(',')[1])
-                                                            },
-                                                            {
-                                                                lat: parking.ParkingLocation.Lat,
-                                                                lng: parking.ParkingLocation.Lng
-                                                            },
-                                                            50
-                                                        )){
-
-                                                            //User's parking history
-                                                            if(localStorage.getItem('user')!=null && authService.getUserInfo() != null){
-                                                                userService.addParkingHistory({
-                                                                    username: JSON.parse(localStorage.getItem('user'))?.username,
-                                                                    ParkingID: parseInt(parking.ParkingID)
-                                                                }).then(res=>console.log(res)).catch(e=>console.log(e))
-                                                            }
-
-                                                            setDoDirections(false);
-                                                            setOpenInfoWindow(true);
-                                                            toast.success('Arrived!');
-                                                            return;
-                                                        }
-                                                        
                                                         setOpenInfoWindow(false);   // setOpenInfoWindow to false to hide the popup and show the direction 
                                                         setDirections({
                                                             origin,
@@ -264,7 +238,36 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                                         // }))
                                                         setDoDirections(true);
 
-                                                        setTimer(setInterval(()=>{setCallDir(prev=>prev+1)},100000))
+                                                        setTimer(setInterval(()=>{
+                                                            setCallDir(prev=>prev+1)
+
+                                                            if(checkCircleInMarker(
+                                                                {
+                                                                    lat: parseFloat(origin.split(',')[0]),
+                                                                    lng: parseFloat(origin.split(',')[1])
+                                                                },
+                                                                {
+                                                                    lat: parking.ParkingLocation.Lat,
+                                                                    lng: parking.ParkingLocation.Lng
+                                                                },
+                                                                50
+                                                            )){
+    
+                                                                //User's parking history
+                                                                if(localStorage.getItem('user')!=null && authService.getUserInfo() != null){
+                                                                    userService.addParkingHistory({
+                                                                        username: JSON.parse(localStorage.getItem('user'))?.username,
+                                                                        ParkingID: parseInt(parking.ParkingID)
+                                                                    }).then(res=>console.log(res)).catch(e=>console.log(e))
+                                                                }
+                                                                
+                                                                clearInterval(timer)
+                                                                setDoDirections(false);
+                                                                setOpenInfoWindow(true);
+                                                                toast.success('Arrived!');
+                                                                return;
+                                                            }
+                                                        },100000))
 
                                                     }}>SHOW DIRECTION</button>
                                                 </div>
