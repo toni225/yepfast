@@ -21,7 +21,7 @@ import * as authService from "../../services/auth.service";
 
 const libraries = ["places"]; // Declare libraries as a constant variable
 
-const MapDisplay = ({ data = [], page, markedLocation }) => {
+const MapDisplay = ({ data = [], page, markedLocation, socket = null }) => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
@@ -41,11 +41,10 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
   const [openAlertDialog, setOpenAlertDialog] = useState(false);
   const infoWindowTimeoutRef = useRef(null); // Ref for the timeout
 
-  // const [watchId,setWatchId] = useState(0);
-  // const [reqCount,setReqCount] = useState(0);
   const [callDir, setCallDir] = useState(0);
   const [timer, setTimer] = useState(null);
   const [ParkingID, setParkingID] = useState(0);
+  const [ParkingUsername, setParkingUsername] = useState("");
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -56,10 +55,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
 
           if (
             checkCircleInMarker(
-              {
-                lat,
-                lng,
-              },
+              { lat, lng },
               {
                 lat: parseFloat(directions.destination?.split(",")[0]),
                 lng: parseFloat(directions.destination?.split(",")[1]),
@@ -85,6 +81,11 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
             setDoDirections(false);
             setOpenInfoWindow(true);
             toast.success("Arrived!");
+            // socket?.emit("sendNotification", {
+            //   senderName: JSON.parse(localStorage.getItem("user"))?.username,
+            //   recieverName: ParkingUsername,
+            //   ParkingID,
+            // });
             return;
           }
 
@@ -100,28 +101,6 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
       setOrigin("10.32546837125536, 123.95334301842492");
     }
   }, [callDir]);
-
-  // useEffect(() => {
-  //     if(checkCircleInMarker())
-  // }, [origin]);
-
-  // useEffect(() => {
-  //     const watchId = navigator.geolocation.watchPosition(
-  //       position => {
-  //         const { latitude, longitude } = position.coords;
-  //         setOrigin({ lat: latitude, lng: longitude });
-  //       },
-  //       error => {
-  //         console.error(error.message);
-  //       }
-  //     );
-
-  //     console.log('updated!')
-  //     return () => {
-  //       navigator.geolocation.clearWatch(watchId);
-  //     };
-
-  //   }, [callDir]); // Fetch user's location continuously on component mount
 
   //Clicking navigate in ParkingList
   useEffect(() => {
@@ -221,6 +200,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                     getParkingImage(parking.username, parking.ParkingName);
                     setDoDirections(false); // set to false to hide directions when clicking a marker or another marker
                     setParkingID(parseInt(parking.ParkingID));
+                    setParkingUsername(parking.username);
                   }}
                   position={{
                     lat: parseFloat(parking.ParkingLocation.Lat),
@@ -246,6 +226,7 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                         setDirections("");
                         setCallDir(0);
                         setParkingID(0);
+                        setParkingUsername("");
                         clearInterval(timer);
                       }}
                     >
@@ -333,20 +314,16 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                                 origin,
                                 destination: `${parking.ParkingLocation.Lat}, ${parking.ParkingLocation.Lng}`,
                               });
-                              // setWatchId(navigator.geolocation.watchPosition(pos => {
-                              //     const lat = parseFloat(pos.coords.latitude)
-                              //     const lng = parseFloat(pos.coords.longitude)
-                              //     setDirections({
-                              //         origin: `${lat},${lng}`,
-                              //         destination: `${parking.ParkingLocation.Lat}, ${parking.ParkingLocation.Lng}`
-                              //     });
-                              //     // console.log('directions working')
-                              //     setReqCount(prev=>prev+1)
-                              // }, (err) => {
-                              //     console.log(err)
-                              //     console.log('directions stopped')
-                              // }))
+
                               setDoDirections(true);
+
+                              socket?.emit("sendNotification", {
+                                senderName: JSON.parse(
+                                  localStorage.getItem("user")
+                                )?.username,
+                                recieverName: ParkingUsername,
+                                ParkingID,
+                              });
 
                               setTimer(
                                 setInterval(() => {
@@ -364,7 +341,6 @@ const MapDisplay = ({ data = [], page, markedLocation }) => {
                 </AdvancedMarker>
               </div>
             ))}
-            {/* {doDirections && console.log(callDir)} */}
 
             {/* Calling the directions api whenever doDirections is True */}
             {doDirections && (
