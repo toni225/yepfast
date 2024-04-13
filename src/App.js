@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     // setSocket(io("http://localhost:4000"));
-    setSocket(io("https://yepfastapi.vercel.app/"));
+    setSocket(io("https://yepfastapi.vercel.app"));
   }, []);
 
   useEffect(() => {
